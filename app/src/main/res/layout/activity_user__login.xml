@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".User.User_Login"
+    android:orientation="vertical"
+    android:background="@drawable/imag_">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="User Login"
+        android:textSize="40dp"
+        android:layout_marginTop="150dp"
+        android:layout_marginLeft="100dp"
+        android:textColor="#ffff"/>
+
+    <EditText
+        android:id="@+id/user_userid"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:background="@drawable/customedittext"
+        android:drawableLeft="@drawable/username"
+        android:hint="User Id"
+        android:textColorHint="#ffff" />
+
+    <EditText
+        android:id="@+id/user_userpassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:inputType="textPassword"
+        android:background="@drawable/customedittext"
+        android:drawableLeft="@drawable/ic_vpn_key_black_24dp"
+        android:hint="Password"
+        android:textColorHint="#ffff" />
+
+    <Button
+        android:id="@+id/user_usersubmit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:hint="submit" />
+
+    <TextView
+        android:id="@+id/user_usersignup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:gravity="center"
+        android:text="Not a member? Sign up now"
+        android:textColor="#fff"
+        android:textSize="20dp" />
+
+</LinearLayout>

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Admin.Admin_Login"
+    android:orientation="vertical"
+    android:background="@drawable/imag_">
+    <LinearLayout
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:orientation="vertical"
+        android:gravity="center">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Admin Login"
+            android:textSize="40dp"
+            android:layout_marginLeft="60dp"/>
+
+        <EditText
+            android:id="@+id/admin_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:background="@drawable/customedittext"
+            android:drawableLeft="@drawable/username"
+            android:hint="User Id"
+            android:textColorHint="#ffff" />
+
+        <EditText
+            android:id="@+id/admin_password"
+            android:inputType="textPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:background="@drawable/customedittext"
+            android:drawableLeft="@drawable/ic_vpn_key_black_24dp"
+            android:hint="   Password"
+            android:textColorHint="#ffff" />
+
+        <Button
+            android:id="@+id/admin_submit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:hint="submit" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Not a member? Sign up now"
+            android:textSize="20dp"
+            android:textColor="#fff"
+            android:id="@+id/admin_sigup"
+            android:gravity="center"/>
+
+
+    </LinearLayout>
+
+</LinearLayout>

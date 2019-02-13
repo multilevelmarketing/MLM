@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Customer.Customer_Login"
+    android:orientation="vertical"
+    android:background="@drawable/imag_">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Customer Login"
+        android:textSize="40dp"
+        android:layout_marginTop="150dp"
+        android:layout_marginLeft="60dp"
+        android:textColor="#ffff"/>
+
+    <EditText
+        android:id="@+id/cus_login_id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:background="@drawable/customedittext"
+        android:drawableLeft="@drawable/username"
+        android:hint="User Id"
+        android:textColorHint="#ffff" />
+
+    <EditText
+        android:id="@+id/cus_login_password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:background="@drawable/customedittext"
+        android:drawableLeft="@drawable/ic_vpn_key_black_24dp"
+        android:inputType="textPassword"
+        android:hint="Password"
+        android:textColorHint="#ffff" />
+
+    <Button
+        android:onClick="CustomerLogin_Submit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="submit"
+        android:layout_margin="10dp"
+        android:id="@+id/cus_login_btn"/>
+
+</LinearLayout>
