@@ -50,7 +50,7 @@ public class Admin_Profile extends Fragment {
 
 
         SharedPreferences pref =this.getActivity().getSharedPreferences("Login", MODE_PRIVATE);
-        userId=pref.getString("RegId","");
+        userId=pref.getString("RegId","null");
         Boolean login=pref.getBoolean("IsLogin",false);
 
 

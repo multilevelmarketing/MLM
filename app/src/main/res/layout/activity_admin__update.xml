@@ -156,6 +156,7 @@
                 android:layout_margin="10dp"
                 android:background="@drawable/customedittext"/>
             <Button
+                android:onClick="adminupdate"
                 android:id="@+id/user_sumitbtn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

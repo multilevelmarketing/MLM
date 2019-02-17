@@ -124,7 +124,6 @@ public class Admin_Login extends AppCompatActivity {
                                       progressDialog.dismiss();
                                       SharedPreferences pref = getSharedPreferences("Login", MODE_PRIVATE);
                                       SharedPreferences.Editor editor = pref.edit();
-
                                       editor.putString("RegId", UserID);
                                       editor.putBoolean("IsLogin", true);
                                       editor.commit();
@@ -134,8 +133,6 @@ public class Admin_Login extends AppCompatActivity {
 
                                       Intent intent=new Intent(getApplicationContext(), Admin_Panel.class);
                                       startActivity(intent);
-                                      //Toast.makeText(Admin_Login.this, "Account Successfully Created", Toast.LENGTH_SHORT).show();
-                                      //finish();
                                   }
                                   else
                                   {
