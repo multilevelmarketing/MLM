@@ -14,6 +14,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -36,6 +37,7 @@ import static android.content.Context.MODE_PRIVATE;
 public class Admin_Profile extends Fragment {
 
      TextView id,adminname,Companyname,Password,Email,Pn,Gender,Address;
+     Button Admin_Update;
      RequestQueue requestQueue;
      String userId;
 
@@ -60,20 +62,21 @@ public class Admin_Profile extends Fragment {
         Pn=(TextView)mview.findViewById(R.id.ad_ph);
         Gender=(TextView)mview.findViewById(R.id.ad_gender);
         Address=(TextView)mview.findViewById(R.id.ad_address);
+        Admin_Update=(Button)mview.findViewById(R.id.admin_update);
 
         requestQueue = Volley.newRequestQueue(mview.getContext());
-
-
         myfunction(mview);
 
+
+        Admin_Update.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                startActivity(new Intent(getActivity(),Admin_Update.class));
+            }
+        });
+
         //id.setText(Id);
-
-
-
-
-
-
-
 
         return mview;
 

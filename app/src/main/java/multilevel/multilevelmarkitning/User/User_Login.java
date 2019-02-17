@@ -82,7 +82,12 @@ public class User_Login extends AppCompatActivity {
             public void onClick(View v) {
                 String UserID=username.getText().toString().trim();
                 String Password=userpassword.getText().toString().trim();
-                if(TextUtils.isEmpty(UserID) )
+                if(TextUtils.isEmpty(UserID) && TextUtils.isEmpty(Password))
+                {
+                    username.setError("please fill the fields");
+                    userpassword.setError("please fill the fields");
+                }
+               else if(TextUtils.isEmpty(UserID) )
                 {
                     username.setError("please fill the fields");
                     //userpassword.setError("please fill the fields");
@@ -91,11 +96,7 @@ public class User_Login extends AppCompatActivity {
                 {
                     userpassword.setError("please fill the fields");
                 }
-                else if(TextUtils.isEmpty(UserID)|| TextUtils.isEmpty(Password))
-                {
-                    username.setError("please fill the fields");
-                    userpassword.setError("please fill the fields");
-                }
+
                 else
                 {
                     if(checkBox.isChecked())

@@ -75,7 +75,13 @@ public class Admin_Login extends AppCompatActivity {
             public void onClick(View v) {
                 final String UserID=userid.getText().toString().trim();
                 String Password=password.getText().toString().trim();
-                if(TextUtils.isEmpty(UserID))
+                if(TextUtils.isEmpty(UserID) && TextUtils.isEmpty(Password))
+                {
+                    userid.setError("please fill the fields");
+                    password.setError("please fill the fields");
+                }
+
+                else if(TextUtils.isEmpty(UserID))
                 {
                     userid.setError("Please fill the UserId");
 
@@ -84,11 +90,7 @@ public class Admin_Login extends AppCompatActivity {
                 {
                     password.setError("Please fill the Password");
                 }
-                else if(TextUtils.isEmpty(UserID)|| TextUtils.isEmpty(Password))
-                {
-                    userid.setError("please fill the fields");
-                    password.setError("please fill the fields");
-                }
+
                 else
                 {
                     if(checkBox.isChecked())

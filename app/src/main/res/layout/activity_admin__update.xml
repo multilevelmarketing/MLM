@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Admin.Admin_Update"
+    android:orientation="vertical"
+    android:background="@drawable/imag_">
+
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Admin Update"
+                android:textSize="40dp"
+                android:layout_marginLeft="70dp"
+                android:textColor="#fff"/>
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Id"
+                android:textSize="20dp"
+                android:textColor="#fff"
+                android:layout_marginLeft="10dp"/>
+
+            <EditText
+                android:id="@+id/adminup_id"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:background="@drawable/customedittext"
+                android:textColorHint="#ffff" />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Admin Name"
+                android:textSize="20dp"
+                android:textColor="#fff"
+               android:layout_marginLeft="10dp"/>
+            <EditText
+                android:id="@+id/adminup_username"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:background="@drawable/customedittext"
+                android:textColorHint="#ffff" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Company Name"
+                android:textSize="20dp"
+                android:textColor="#fff"
+                android:layout_marginLeft="10dp"/>
+            <EditText
+                android:id="@+id/adminup_cname"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:background="@drawable/customedittext"
+
+                android:textColorHint="#ffff" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Password"
+                android:textSize="20dp"
+                android:textColor="#fff"
+                android:layout_marginLeft="10dp"/>
+
+            <EditText
+                android:id="@+id/adminup_pass"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:background="@drawable/customedittext"
+                android:inputType="textPassword"
+                android:textColorHint="#ffff" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Email"
+                android:textSize="20dp"
+                android:textColor="#fff"
+                android:layout_marginLeft="10dp"/>
+
+
+            <EditText
+                android:id="@+id/adminup_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:background="@drawable/customedittext"
+                android:inputType="textEmailAddress"
+                android:textColorHint="#ffff" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Mobile No"
+                android:textSize="20dp"
+                android:textColor="#fff"
+                android:layout_marginLeft="10dp"/>
+            <EditText
+                android:id="@+id/adminup_usermobile"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:background="@drawable/customedittext"
+
+                android:inputType="phone"
+                android:textColorHint="#ffff" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Gender"
+                android:textSize="20dp"
+                android:textColor="#fff"/>
+            <EditText
+                android:id="@+id/adminup_gender"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:textColor="#fff"
+                android:layout_margin="10dp"
+                android:background="@drawable/customedittext"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Address"
+                android:textSize="20dp"
+                android:textColor="#fff"
+                android:layout_marginLeft="10dp"/>
+            <EditText
+                android:id="@+id/adminup_addres"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="#fff"
+                android:layout_margin="10dp"
+                android:background="@drawable/customedittext"/>
+            <Button
+                android:id="@+id/user_sumitbtn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:hint="Update" />
+
+
+
+        </LinearLayout>
+
+    </ScrollView>
+
+
+</LinearLayout>

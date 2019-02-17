@@ -38,8 +38,7 @@
                 android:id="@+id/Admin_Id"
                 android:layout_marginLeft="20dp"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="#fff"/>
+                android:layout_height="wrap_content" />
 
 
             <TextView
@@ -53,8 +52,7 @@
                 android:id="@+id/ad_user_name"
                 android:layout_marginLeft="20dp"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="#fff"/>
+                android:layout_height="wrap_content" />
 
 
 
@@ -69,8 +67,7 @@
                 android:id="@+id/ad_cmp_name"
                 android:layout_marginLeft="20dp"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="#fff"/>
+                android:layout_height="wrap_content" />
 
 
 
@@ -86,8 +83,7 @@
                 android:id="@+id/ad_pass"
                 android:layout_marginLeft="20dp"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="#fff"/>
+                android:layout_height="wrap_content" />
 
 
 
@@ -103,8 +99,7 @@
                 android:id="@+id/ad_email"
                 android:layout_marginLeft="20dp"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="#fff"/>
+                android:layout_height="wrap_content" />
 
 
 
@@ -121,8 +116,7 @@
                 android:id="@+id/ad_ph"
                 android:layout_marginLeft="20dp"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="#fff"/>
+                android:layout_height="wrap_content" />
 
 
 
@@ -137,8 +131,7 @@
                 android:id="@+id/ad_gender"
                 android:layout_marginLeft="20dp"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="#fff"/>
+                android:layout_height="wrap_content" />
 
 
 
@@ -154,10 +147,10 @@
                 android:id="@+id/ad_address"
                 android:layout_marginLeft="20dp"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="#fff"/>
+                android:layout_height="wrap_content" />
 
            <Button
+               android:id="@+id/admin_update"
                android:layout_margin="20dp"
                android:layout_width="match_parent"
                android:layout_height="wrap_content"
