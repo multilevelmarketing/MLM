@@ -1,5 +1,6 @@
 package multilevel.multilevelmarkitning.User;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
@@ -25,6 +26,7 @@ public class User_Login extends AppCompatActivity {
     Intent intent;
     String usrid;
     CheckBox checkBox;
+    ProgressDialog progressDialog;
     private SharedPreferences loginPreferences;
     private SharedPreferences.Editor loginPrefsEditor;
     @Override
@@ -34,6 +36,7 @@ public class User_Login extends AppCompatActivity {
         intent=this.getIntent();
         username=(EditText)findViewById(R.id.user_userid);
         checkBox=(CheckBox)findViewById(R.id.user_checkBox);
+        progressDialog=new ProgressDialog(this);
         if(intent!=null) {
             usrid = intent.getStringExtra("userid");
             //Toast.makeText(getApplicationContext(),usrid,Toast.LENGTH_SHORT).show();
@@ -83,6 +86,14 @@ public class User_Login extends AppCompatActivity {
                     if(Password.length()<6)
                     {
                         userpassword.setError("Minimum 6 lengths required");
+                    }
+                    else
+                    {
+                        progressDialog.setTitle("Processing...");
+                        progressDialog.setMessage("Please wait...");
+                        progressDialog.setCancelable(false);
+                        progressDialog.setIndeterminate(true);
+                        progressDialog.show();
                     }
                     Intent intent=new Intent(getApplicationContext(),User_Show.class);
                     startActivity(intent);
