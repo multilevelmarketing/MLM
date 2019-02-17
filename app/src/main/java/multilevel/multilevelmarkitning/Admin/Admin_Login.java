@@ -1,5 +1,6 @@
 package multilevel.multilevelmarkitning.Admin;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
@@ -37,6 +38,8 @@ public class Admin_Login extends AppCompatActivity {
     CheckBox checkBox;
     private SharedPreferences loginPreferences;
     private SharedPreferences.Editor loginPrefsEditor;
+    ProgressDialog progressDialog;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +50,7 @@ public class Admin_Login extends AppCompatActivity {
         loginbtn=(Button) findViewById(R.id.admin_submit);
         signup=(TextView)findViewById(R.id.admin_sigup);
         checkBox=(CheckBox)findViewById(R.id.admin_checkBox);
+        progressDialog=new ProgressDialog(this);
         loginPreferences=getSharedPreferences("adminLogin",MODE_PRIVATE);
         loginPrefsEditor=loginPreferences.edit();
 
@@ -94,8 +98,12 @@ public class Admin_Login extends AppCompatActivity {
                     }
                     else
                     {
-
-                      AdminLogin adminLogin=new AdminLogin(UserID,Password,new Response.Listener<String>(){
+                        progressDialog.setTitle("Processing...");
+                        progressDialog.setMessage("Please wait...");
+                        progressDialog.setCancelable(false);
+                        progressDialog.setIndeterminate(true);
+                        progressDialog.show();
+                        AdminLogin adminLogin=new AdminLogin(UserID,Password,new Response.Listener<String>(){
                           @Override
 
                           public void onResponse(String response) {
@@ -106,6 +114,7 @@ public class Admin_Login extends AppCompatActivity {
                                   if (new JSONObject(response).getBoolean("success"))
                                   {
 
+                                      progressDialog.dismiss();
                                       SharedPreferences pref = getSharedPreferences("Login", MODE_PRIVATE);
                                       SharedPreferences.Editor editor = pref.edit();
 
@@ -122,7 +131,11 @@ public class Admin_Login extends AppCompatActivity {
                                       //finish();
                                   }
                                   else
+                                  {
+                                      progressDialog.dismiss();
                                       Toast.makeText(Admin_Login.this, "Something Has Happened. Please Try Again!", Toast.LENGTH_SHORT).show();
+
+                                  }
                               }
                               catch (JSONException e)
                               {
@@ -134,6 +147,7 @@ public class Admin_Login extends AppCompatActivity {
                       });
 
                         requestQueue.add(adminLogin);
+
                     }
 
                 }

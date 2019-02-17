@@ -112,6 +112,7 @@ public class Customer_Login extends AppCompatActivity {
                                         }
                                         else
                                         {
+                                            progressDialog.dismiss();
                                             Toast.makeText(getApplicationContext(), "Invalid password or user id ", Toast.LENGTH_SHORT).show();
                                         }
                                     }
