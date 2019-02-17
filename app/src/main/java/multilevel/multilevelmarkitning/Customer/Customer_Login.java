@@ -1,12 +1,14 @@
 package multilevel.multilevelmarkitning.Customer;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -30,6 +32,9 @@ public class Customer_Login extends AppCompatActivity {
     EditText password;
     Button loginbtn;
     RequestQueue requestQueue;
+    CheckBox checkBox;
+    private SharedPreferences loginPreferences;
+    private SharedPreferences.Editor loginPrefsEditor;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,7 +42,18 @@ public class Customer_Login extends AppCompatActivity {
         userid=(EditText)findViewById(R.id.cus_login_id);
         password=(EditText)findViewById(R.id.cus_login_password);
         loginbtn=(Button) findViewById(R.id.cus_login_btn);
+        checkBox=(CheckBox)findViewById(R.id.cus_checkBox);
         requestQueue = Volley.newRequestQueue(Customer_Login.this);
+        loginPreferences=getSharedPreferences("customerLogin",MODE_PRIVATE);
+        loginPrefsEditor=loginPreferences.edit();
+//        loginPrefsEditor.putString("username","");
+//        loginPrefsEditor.putString("password","");
+
+        userid.setText(loginPreferences.getString("username",null));
+        password.setText(loginPreferences.getString("password",null));
+
+
+
 
 
 
@@ -46,13 +62,23 @@ public class Customer_Login extends AppCompatActivity {
             public void onClick(View v) {
                 String UserID=userid.getText().toString().trim();
                 String Password=password.getText().toString().trim();
-                if(TextUtils.isEmpty(UserID) || TextUtils.isEmpty(Password))
+                if(TextUtils.isEmpty(UserID))
                 {
                     userid.setError("please fill the fields");
+
+                }
+                else if(TextUtils.isEmpty(Password))
+                {
                     password.setError("please fill the fields");
                 }
                 else
                 {
+                    if(checkBox.isChecked())
+                    {
+                        loginPrefsEditor.putString("username",UserID);
+                        loginPrefsEditor.putString("password",Password);
+                        loginPrefsEditor.commit();
+                    }
                     if(Password.length()<6)
                     {
                         password.setError("Minimum 6 lengths required");
@@ -68,7 +94,7 @@ public class Customer_Login extends AppCompatActivity {
 
                                     try
                                     {
-                                        if (new JSONObject(response).getBoolean("success"))
+                                        if (new JSONObject(response).get("success").equals("true"))
                                         {
 
                                             Intent intent=new Intent(getApplicationContext(), Customer_Home_Page.class);
@@ -77,7 +103,9 @@ public class Customer_Login extends AppCompatActivity {
                                             //finish();
                                         }
                                         else
+                                        {
                                             Toast.makeText(getApplicationContext(), "Invalid password or user id ", Toast.LENGTH_SHORT).show();
+                                        }
                                     }
                                     catch (JSONException e)
                                     {
@@ -115,7 +143,7 @@ public class Customer_Login extends AppCompatActivity {
 
     public class CustomerLogin extends StringRequest {
 
-        private static final String REGISTER_URL = "https://veiled-heat.000webhostapp.com/MLM/Customer/customer_reg.php";
+        private static final String REGISTER_URL = "https://veiled-heat.000webhostapp.com/MLM/Customer/customer_login.php";
         private Map<String, String> parameters;
 
         public CustomerLogin(String Id,String  password, Response.Listener<String> listener) {

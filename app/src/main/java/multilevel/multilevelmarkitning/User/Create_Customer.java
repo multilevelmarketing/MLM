@@ -80,8 +80,9 @@ public class Create_Customer extends AppCompatActivity {
 
 
                 if (TextUtils.isEmpty(Name) || TextUtils.isEmpty(Location) || TextUtils.isEmpty(Profession) || TextUtils.isEmpty(Mobile) || TextUtils.isEmpty(Password) || TextUtils.isEmpty(Email)) {
-                    Toast.makeText(getApplicationContext(), "please fill the fields", Toast.LENGTH_SHORT).show();
-                } else {
+                    Toast.makeText(getApplicationContext(), "please fill all  the fields", Toast.LENGTH_SHORT).show();
+                }
+                else {
                     if (Password.length() < 6) {
                         //Toast.makeText(getApplicationContext(),"password must be atleast 6 characters",Toast.LENGTH_SHORT).show();
                         password.setError("password must be atleast 6 characters");
