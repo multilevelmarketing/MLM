@@ -8,6 +8,7 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -33,6 +34,9 @@ public class Admin_Login extends AppCompatActivity {
     Button loginbtn;
     TextView signup;
     RequestQueue requestQueue;
+    CheckBox checkBox;
+    private SharedPreferences loginPreferences;
+    private SharedPreferences.Editor loginPrefsEditor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,8 +46,15 @@ public class Admin_Login extends AppCompatActivity {
         password=(EditText)findViewById(R.id.admin_password);
         loginbtn=(Button) findViewById(R.id.admin_submit);
         signup=(TextView)findViewById(R.id.admin_sigup);
+        checkBox=(CheckBox)findViewById(R.id.admin_checkBox);
+        loginPreferences=getSharedPreferences("adminLogin",MODE_PRIVATE);
+        loginPrefsEditor=loginPreferences.edit();
 
-      requestQueue= Volley.newRequestQueue(Admin_Login.this);
+        userid.setText(loginPreferences.getString("username",null));
+        password.setText(loginPreferences.getString("password",null));
+
+
+        requestQueue= Volley.newRequestQueue(Admin_Login.this);
 
 
         signup.setOnClickListener(new View.OnClickListener() {
@@ -60,13 +71,23 @@ public class Admin_Login extends AppCompatActivity {
             public void onClick(View v) {
                 final String UserID=userid.getText().toString().trim();
                 String Password=password.getText().toString().trim();
-                if(TextUtils.isEmpty(UserID) || TextUtils.isEmpty(Password))
+                if(TextUtils.isEmpty(UserID))
                 {
                     userid.setError("Please fill the UserId");
+
+                }
+                else if(TextUtils.isEmpty(Password))
+                {
                     password.setError("Please fill the Password");
                 }
                 else
                 {
+                    if(checkBox.isChecked())
+                    {
+                        loginPrefsEditor.putString("username",UserID);
+                        loginPrefsEditor.putString("password",Password);
+                        loginPrefsEditor.commit();
+                    }
                     if(Password.length()<6)
                     {
                         password.setError("Minimum 6 lengths required");

@@ -37,6 +37,13 @@
         android:hint="Password"
         android:textColorHint="#ffff" />
 
+    <CheckBox
+        android:id="@+id/cus_checkBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Remember me"
+        android:textColor="#ffff"/>
+
     <Button
         android:onClick="CustomerLogin_Submit"
         android:layout_width="match_parent"

@@ -70,14 +70,7 @@ public class User_Register extends AppCompatActivity {
 
                 if( TextUtils.isEmpty(User_Name) || TextUtils.isEmpty(Password) || TextUtils.isEmpty(Company) || TextUtils.isEmpty(Password) || TextUtils.isEmpty(Mobile) ||TextUtils.isEmpty(Address))
                 {
-                    user_id.setError("Please fill the Id");
-                    user_name.setError("Please fill the Name");
-                    password.setError("Please fill the Password");
-                    company.setError("Please fill the Company Name");
-                    email.setError("Please fill the Email");
-                    password.setError("Please fill the Password");
-                    mobile.setError("Please fill the Mobile");
-                    user_address.setError("Please fill the Full Address");
+                   Toast.makeText(getApplicationContext(),"please fill all the fields",Toast.LENGTH_SHORT).show();
                 }
                 else
                 {

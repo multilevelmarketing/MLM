@@ -41,6 +41,12 @@
             android:drawableLeft="@drawable/ic_vpn_key_black_24dp"
             android:hint="   Password"
             android:textColorHint="#ffff" />
+        <CheckBox
+            android:id="@+id/admin_checkBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Remember me"
+            android:textColor="#ffff"/>
 
         <Button
             android:id="@+id/admin_submit"
