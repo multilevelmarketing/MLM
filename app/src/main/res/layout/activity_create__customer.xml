@@ -76,6 +76,29 @@
                 android:id="@+id/cus_user_mobile"
                 android:textColorHint="#fff"/>
 
+            <RadioGroup
+                android:id="@+id/cus_radiogrp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/cus_male"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Male"
+                    android:textColor="#fff"/>
+
+                <RadioButton
+                    android:id="@+id/cus_female"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="Female"
+                    android:textColor="#fff"/>
+
+            </RadioGroup>
+
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
