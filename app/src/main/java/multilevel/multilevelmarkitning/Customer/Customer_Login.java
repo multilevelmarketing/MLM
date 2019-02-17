@@ -1,5 +1,6 @@
 package multilevel.multilevelmarkitning.Customer;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -33,6 +34,7 @@ public class Customer_Login extends AppCompatActivity {
     Button loginbtn;
     RequestQueue requestQueue;
     CheckBox checkBox;
+    ProgressDialog progressDialog;
     private SharedPreferences loginPreferences;
     private SharedPreferences.Editor loginPrefsEditor;
     @Override
@@ -46,6 +48,7 @@ public class Customer_Login extends AppCompatActivity {
         requestQueue = Volley.newRequestQueue(Customer_Login.this);
         loginPreferences=getSharedPreferences("customerLogin",MODE_PRIVATE);
         loginPrefsEditor=loginPreferences.edit();
+        progressDialog=new ProgressDialog(this);
 //        loginPrefsEditor.putString("username","");
 //        loginPrefsEditor.putString("password","");
 
@@ -85,6 +88,11 @@ public class Customer_Login extends AppCompatActivity {
                     }
                     else
                     {
+                            progressDialog.setTitle("Processing...");
+                            progressDialog.setMessage("Please wait...");
+                            progressDialog.setCancelable(false);
+                            progressDialog.setIndeterminate(true);
+                            progressDialog.show();
 
                             CustomerLogin customerLogin=new CustomerLogin(UserID,Password,new Response.Listener<String>(){
                                 @Override
@@ -96,7 +104,7 @@ public class Customer_Login extends AppCompatActivity {
                                     {
                                         if (new JSONObject(response).get("success").equals("true"))
                                         {
-
+                                            progressDialog.dismiss();
                                             Intent intent=new Intent(getApplicationContext(), Customer_Home_Page.class);
                                             startActivity(intent);
                                             //Toast.makeText(Admin_Login.this, "Account Successfully Created", Toast.LENGTH_SHORT).show();
