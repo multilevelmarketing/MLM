@@ -74,6 +74,11 @@ public class Customer_Login extends AppCompatActivity {
                 {
                     password.setError("please fill the fields");
                 }
+                else if(TextUtils.isEmpty(UserID)|| TextUtils.isEmpty(Password))
+                {
+                    userid.setError("please fill the fields");
+                    password.setError("please fill the fields");
+                }
                 else
                 {
                     if(checkBox.isChecked())

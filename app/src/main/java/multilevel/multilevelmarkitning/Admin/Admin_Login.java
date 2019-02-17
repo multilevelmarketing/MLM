@@ -84,6 +84,11 @@ public class Admin_Login extends AppCompatActivity {
                 {
                     password.setError("Please fill the Password");
                 }
+                else if(TextUtils.isEmpty(UserID)|| TextUtils.isEmpty(Password))
+                {
+                    userid.setError("please fill the fields");
+                    password.setError("please fill the fields");
+                }
                 else
                 {
                     if(checkBox.isChecked())
@@ -133,7 +138,7 @@ public class Admin_Login extends AppCompatActivity {
                                   else
                                   {
                                       progressDialog.dismiss();
-                                      Toast.makeText(Admin_Login.this, "Something Has Happened. Please Try Again!", Toast.LENGTH_SHORT).show();
+                                      Toast.makeText(Admin_Login.this, "Invalid password or user id", Toast.LENGTH_SHORT).show();
 
                                   }
                               }

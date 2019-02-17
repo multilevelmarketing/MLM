@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -13,7 +14,20 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
+
 import multilevel.multilevelmarkitning.Customer.Customer_Home_Page;
+import multilevel.multilevelmarkitning.Customer.Customer_Login;
 import multilevel.multilevelmarkitning.R;
 
 import static android.text.TextUtils.*;
@@ -29,6 +43,7 @@ public class User_Login extends AppCompatActivity {
     ProgressDialog progressDialog;
     private SharedPreferences loginPreferences;
     private SharedPreferences.Editor loginPrefsEditor;
+    RequestQueue requestQueue;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,6 +52,7 @@ public class User_Login extends AppCompatActivity {
         username=(EditText)findViewById(R.id.user_userid);
         checkBox=(CheckBox)findViewById(R.id.user_checkBox);
         progressDialog=new ProgressDialog(this);
+        requestQueue = Volley.newRequestQueue(this);
         if(intent!=null) {
             usrid = intent.getStringExtra("userid");
             //Toast.makeText(getApplicationContext(),usrid,Toast.LENGTH_SHORT).show();
@@ -69,10 +85,15 @@ public class User_Login extends AppCompatActivity {
                 if(TextUtils.isEmpty(UserID) )
                 {
                     username.setError("please fill the fields");
-                    userpassword.setError("please fill the fields");
+                    //userpassword.setError("please fill the fields");
                 }
                 else if(TextUtils.isEmpty(Password))
                 {
+                    userpassword.setError("please fill the fields");
+                }
+                else if(TextUtils.isEmpty(UserID)|| TextUtils.isEmpty(Password))
+                {
+                    username.setError("please fill the fields");
                     userpassword.setError("please fill the fields");
                 }
                 else
@@ -94,12 +115,75 @@ public class User_Login extends AppCompatActivity {
                         progressDialog.setCancelable(false);
                         progressDialog.setIndeterminate(true);
                         progressDialog.show();
+
+
+
+                        UserLogin userLogin=new UserLogin(UserID,Password,new Response.Listener<String>(){
+                            @Override
+
+                            public void onResponse(String response) {
+                                Log.i("Response", response);
+
+                                try
+                                {
+                                    if (new JSONObject(response).get("success").equals("true"))
+                                    {
+                                        progressDialog.dismiss();
+                                        Intent intent=new Intent(getApplicationContext(), User_Show.class);
+                                        startActivity(intent);
+                                        //Toast.makeText(Admin_Login.this, "Account Successfully Created", Toast.LENGTH_SHORT).show();
+                                        //finish();
+                                    }
+                                    else
+                                    {
+                                        progressDialog.dismiss();
+                                        Toast.makeText(getApplicationContext(), "Invalid password or user id ", Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+                                catch (JSONException e)
+                                {
+                                    e.printStackTrace();
+                                }
+                            }
+
+
+                        });
+
+                        requestQueue.add(userLogin);
+
+
+
+
                     }
-                    Intent intent=new Intent(getApplicationContext(),User_Show.class);
-                    startActivity(intent);
+
                 }
             }
         });
     }
+
+    public class UserLogin extends StringRequest {
+
+        private static final String REGISTER_URL = "https://veiled-heat.000webhostapp.com/MLM/User/user_login.php";
+        private Map<String, String> parameters;
+
+        public UserLogin(String Id,String  password, Response.Listener<String> listener) {
+            super(Method.POST, REGISTER_URL, listener, null);
+            parameters = new HashMap<>();
+            parameters.put("loginid",Id);
+            parameters.put("password", password);
+
+
+        }
+
+        @Override
+        protected Map<String, String> getParams() throws AuthFailureError
+        {
+            return parameters;
+        }
+    }
+
+
+
+
 }
 
