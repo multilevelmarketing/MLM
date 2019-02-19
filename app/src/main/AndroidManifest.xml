@@ -11,7 +11,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Admin.Admin_Update"></activity>
+        <activity android:name=".Customer.Customer_show"></activity>
+        <activity android:name=".Customer.customer_update" />
+        <activity android:name=".Admin.Admin_Update" />
         <activity android:name=".Admin.User_Show" />
         <activity android:name=".Admin.Admin_Profile" />
         <activity android:name=".Admin.Admin_Panel" />

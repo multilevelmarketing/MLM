@@ -7,4 +7,17 @@
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
+
+    <string-array name="spinnerlevel">
+        <item>Level 1</item>
+        <item>Level 2</item>
+        <item>Level 3</item>
+        <item>Level 4</item>
+        <item>Level 5</item>
+    </string-array>
+
+    <string-array name="spinnergender">
+        <item>Male</item>
+        <item>Female</item>
+    </string-array>
 </resources>

@@ -37,6 +37,8 @@ public class Customer_Login extends AppCompatActivity {
     ProgressDialog progressDialog;
     private SharedPreferences loginPreferences;
     private SharedPreferences.Editor loginPrefsEditor;
+    private SharedPreferences pref;
+    private SharedPreferences.Editor editor;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,6 +50,10 @@ public class Customer_Login extends AppCompatActivity {
         requestQueue = Volley.newRequestQueue(Customer_Login.this);
         loginPreferences=getSharedPreferences("customerLogin",MODE_PRIVATE);
         loginPrefsEditor=loginPreferences.edit();
+
+        pref=getSharedPreferences("cusLogin",MODE_PRIVATE);
+        editor=pref.edit();
+
         progressDialog=new ProgressDialog(this);
 //        loginPrefsEditor.putString("username","");
 //        loginPrefsEditor.putString("password","");
@@ -65,6 +71,9 @@ public class Customer_Login extends AppCompatActivity {
             public void onClick(View v) {
                 String UserID=userid.getText().toString().trim();
                 String Password=password.getText().toString().trim();
+
+                editor.putString("customerid",UserID);
+                editor.commit();
                 if(TextUtils.isEmpty(UserID) && TextUtils.isEmpty(Password))
                 {
                     userid.setError("please fill the fields");

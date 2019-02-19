@@ -11,7 +11,7 @@ import multilevel.multilevelmarkitning.User.Create_Customer;
 
 public class Customer_Home_Page extends AppCompatActivity {
 
-     TextView Customer_Commesion,Customer_Create;
+     TextView Customer_Commesion,Customer_Create,Customer_Profile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,6 +19,7 @@ public class Customer_Home_Page extends AppCompatActivity {
         setContentView(R.layout.activity_customer__home__page);
         Customer_Commesion=(TextView)findViewById(R.id.Customer_comission);
         Customer_Create=(TextView)findViewById(R.id.Customer_create);
+        Customer_Profile=(TextView)findViewById(R.id.cus_profile);
 
        Customer_Commesion.setOnClickListener(new View.OnClickListener() {
            @Override
@@ -36,6 +37,14 @@ public class Customer_Home_Page extends AppCompatActivity {
 
                startActivity(new Intent(Customer_Home_Page.this, Create_Customer.class));
 
+           }
+       });
+
+       Customer_Profile.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View v) {
+               Intent intent=new Intent(getApplicationContext(),Customer_show.class);
+               startActivity(new Intent(intent));
            }
        });
 
