@@ -8,12 +8,17 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import multilevel.multilevelmarkitning.Admin.Admin_Profile;
 import multilevel.multilevelmarkitning.Admin.Admin_Update;
@@ -26,6 +31,7 @@ public class Customer_show extends AppCompatActivity {
     RequestQueue requestQueue;
     SharedPreferences pref;
     SharedPreferences.Editor editor;
+    String id=new String();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,7 +49,7 @@ public class Customer_show extends AppCompatActivity {
         requestQueue= Volley.newRequestQueue(this);
         pref=getSharedPreferences("cusLogin",MODE_PRIVATE);
         editor=pref.edit();
-        String id=pref.getString("customerid",null);
+        id=pref.getString("customerid",null);
         tvid.setText(pref.getString("customerid",null));
 
 
@@ -61,14 +67,14 @@ public class Customer_show extends AppCompatActivity {
 
                     if (new JSONObject(response).getString("success").equals("true"))
                     {
-                        id.setText(new JSONObject(response).getString("RegId"));
-                        adminname.setText(new JSONObject(response).getString("RegName"));
-                        Companyname.setText(new JSONObject(response).getString("RegCmp"));
-                        Password.setText(new JSONObject(response).getString("RegPass"));
-                        Email.setText(new JSONObject(response).getString("RegEmail"));
-                        Pn.setText(new JSONObject(response).getString("RegMobile"));
-                        Gender.setText(new JSONObject(response).getString("RegGender"));
-                        Address.setText(new JSONObject(response).getString("RegAddress"));
+                        tvname.setText(new JSONObject(response).getString("RegName"));
+                        tvprofession.setText(new JSONObject(response).getString("RegProfession"));
+                        tvlevel.setText(new JSONObject(response).getString("RegLevel"));
+                        tvparent.setText(new JSONObject(response).getString("RegParent"));
+                        tvemail.setText(new JSONObject(response).getString("RegEmail"));
+                        tvmobile.setText(new JSONObject(response).getString("RegMobile"));
+                        tvgender.setText(new JSONObject(response).getString("RegGender"));
+                        tvaddress.setText(new JSONObject(response).getString("RegAddress"));
 
 
                     }
@@ -76,7 +82,7 @@ public class Customer_show extends AppCompatActivity {
                     else
                     {
 
-                        Toast.makeText(getContext(),"Something Has Happened. Please Try Again",Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(),"id not found",Toast.LENGTH_LONG).show();
                     }
 
 
@@ -91,11 +97,27 @@ public class Customer_show extends AppCompatActivity {
             }
         });
 
-        requestQueue.add(adminProfile);
+        requestQueue.add(customerProfile);
+    }
 
 
 
 
+    public class CustomerProfile extends StringRequest
+    {
+        private static final String URL="https://veiled-heat.000webhostapp.com/MLM/Customer/customer_profile.php";
+        private Map<String,String> paremeters;
 
+        public CustomerProfile(String userid, Response.Listener<String> listener) {
+            super(Method.POST, URL, listener, null);
+            paremeters = new HashMap<>();
+            paremeters.put("cusid",userid);
+        }
+
+        @Override
+        protected Map<String, String> getParams() throws AuthFailureError
+        {
+            return paremeters;
+        }
     }
 }

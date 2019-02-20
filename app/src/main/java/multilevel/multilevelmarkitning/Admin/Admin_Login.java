@@ -39,6 +39,7 @@ public class Admin_Login extends AppCompatActivity {
     private SharedPreferences loginPreferences;
     private SharedPreferences.Editor loginPrefsEditor;
     ProgressDialog progressDialog;
+    Intent intent;
 
 
     @Override
@@ -53,9 +54,19 @@ public class Admin_Login extends AppCompatActivity {
         progressDialog=new ProgressDialog(this);
         loginPreferences=getSharedPreferences("adminLogin",MODE_PRIVATE);
         loginPrefsEditor=loginPreferences.edit();
+        intent=getIntent();
+        String intentid=intent.getStringExtra("userid");
+        if(intentid!=null)
+        {
+            userid.setText(intentid);
+        }
+        else
+        {
+            userid.setText(loginPreferences.getString("username",null));
+            password.setText(loginPreferences.getString("password",null));
 
-        userid.setText(loginPreferences.getString("username",null));
-        password.setText(loginPreferences.getString("password",null));
+        }
+
 
 
         requestQueue= Volley.newRequestQueue(Admin_Login.this);

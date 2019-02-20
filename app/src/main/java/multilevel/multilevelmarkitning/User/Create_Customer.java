@@ -28,6 +28,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
+import multilevel.multilevelmarkitning.IdGenerator;
 import multilevel.multilevelmarkitning.R;
 import multilevel.multilevelmarkitning.Validation;
 
@@ -98,7 +99,8 @@ public class Create_Customer extends AppCompatActivity {
                         int selectedId = radioSexGroup.getCheckedRadioButtonId();
                         radioSexButton = (RadioButton) findViewById(selectedId);
                         String sex = radioSexButton.getText().toString().trim();
-                        final String idgenerated = UUID.randomUUID().toString();
+                 //       final String idgenerated = UUID.randomUUID().toString();
+                        final String idgenerated = IdGenerator.generateId(Name);
 
 
                         CustomerRegister registerRequest = new CustomerRegister(idgenerated, Name, Mobile, Email, Password, Profession, Level, sex, Location, new Response.Listener<String>() {

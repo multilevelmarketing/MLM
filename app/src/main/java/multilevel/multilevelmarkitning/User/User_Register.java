@@ -27,6 +27,7 @@ import org.json.JSONObject;
 import java.util.Map;
 import java.util.UUID;
 
+import multilevel.multilevelmarkitning.IdGenerator;
 import multilevel.multilevelmarkitning.R;
 import multilevel.multilevelmarkitning.Validation;
 
@@ -60,7 +61,7 @@ public class User_Register extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String Id=user_id.getText().toString().trim();
-                String User_Name=user_name.getText().toString().trim();
+                final String User_Name=user_name.getText().toString().trim();
                 String Company=company.getText().toString().trim();
                 String Email=email.getText().toString().trim();
                 String Password=password.getText().toString().trim();
@@ -112,7 +113,9 @@ public class User_Register extends AppCompatActivity {
 
                                         //  Toast.makeText(Admin_Register.this, "Account Successfully Created", Toast.LENGTH_LONG).show();
 
-                                        final String idgenerated = UUID.randomUUID().toString();
+                                     //   final String idgenerated = UUID.randomUUID().toString();
+                                        final String idgenerated = IdGenerator.generateId(User_Name);
+
                                         builder.setMessage("Your ID is "+idgenerated);
                                         builder.setCancelable(true);
                                         builder.setPositiveButton("ok", new DialogInterface.OnClickListener() {

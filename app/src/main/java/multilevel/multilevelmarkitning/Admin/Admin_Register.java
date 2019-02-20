@@ -26,6 +26,7 @@ import org.json.JSONObject;
 import java.util.UUID;
 
 import multilevel.multilevelmarkitning.Customer.Customer_Home_Page;
+import multilevel.multilevelmarkitning.IdGenerator;
 import multilevel.multilevelmarkitning.R;
 import multilevel.multilevelmarkitning.User.User_Login;
 import multilevel.multilevelmarkitning.User.User_Register;
@@ -45,7 +46,7 @@ public class Admin_Register extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin__register);
 
-        user_id=(EditText)findViewById(R.id.user_id);
+      //  user_id=(EditText)findViewById(R.id.user_id);
         user_name=(EditText)findViewById(R.id.user_reg_id);
         company=(EditText)findViewById(R.id.user_reg_cname);
         email=(EditText)findViewById(R.id.user_reg_email);
@@ -61,8 +62,9 @@ public class Admin_Register extends AppCompatActivity {
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String Id=user_id.getText().toString().trim();
-                String User_Name=user_name.getText().toString().trim();
+               // String Id=user_id.getText().toString().trim();
+                final String User_Name=user_name.getText().toString().trim();
+                final String idgenerated = IdGenerator.generateId(User_Name);
                 String Company=company.getText().toString().trim();
                 String Email=email.getText().toString().trim();
                 String Password=password.getText().toString().trim();
@@ -102,26 +104,26 @@ public class Admin_Register extends AppCompatActivity {
                         radioButtonsex = (RadioButton)findViewById(selectedId);
                         String Gender=radioButtonsex.getText().toString().trim();
 
-                        RegisterRequest registerRequest = new RegisterRequest(Id,User_Name, Company, Password,Email,Mobile,Gender,Address ,new Response.Listener<String>() {
+                        RegisterRequest registerRequest = new RegisterRequest(idgenerated,User_Name, Company, Password,Email,Mobile,Gender,Address ,new Response.Listener<String>() {
                             @Override
                             public void onResponse(String response) {
                                 Log.i("Response", response);
 
                                 try
                                 {
-                                    if (new JSONObject(response).getString("status").equals("register"))
+                                    if (new JSONObject(response).getString("status").equals("true"))
                                     {
 
                                       //  Toast.makeText(Admin_Register.this, "Account Successfully Created", Toast.LENGTH_LONG).show();
 
-                                        final String idgenerated = UUID.randomUUID().toString();
+                                      //  final String idgenerated = UUID.randomUUID().toString();
                                         builder.setMessage("Your ID is "+idgenerated);
                                         builder.setCancelable(true);
                                         builder.setPositiveButton("ok", new DialogInterface.OnClickListener() {
                                             @Override
                                             public void onClick(DialogInterface dialog, int which) {
                                                 dialog.cancel();
-                                                Intent intent=new Intent(getApplicationContext(),User_Login.class);
+                                                Intent intent=new Intent(getApplicationContext(),Admin_Login.class);
                                                 intent.putExtra("userid",idgenerated);
                                                 startActivity(intent);
                                             }
@@ -135,7 +137,7 @@ public class Admin_Register extends AppCompatActivity {
                                         //finish();
                                     }
                                     else
-                                        Toast.makeText(Admin_Register.this, "Something Has Happened. Please Try Again!", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(Admin_Register.this, "invalid user name or password", Toast.LENGTH_SHORT).show();
                                 }
                                 catch (JSONException e)
                                 {
