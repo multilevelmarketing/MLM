@@ -1,9 +1,8 @@
 package multilevel.multilevelmarkitning.Customer;
 
 import android.content.Intent;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -24,8 +23,6 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
-import multilevel.multilevelmarkitning.Admin.Admin_Profile;
-import multilevel.multilevelmarkitning.Admin.Admin_Update;
 import multilevel.multilevelmarkitning.R;
 
 public class Customer_update extends AppCompatActivity {
