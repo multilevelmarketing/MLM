@@ -119,8 +119,8 @@ public class Create_Customer extends AppCompatActivity {
                                             @Override
                                             public void onClick(DialogInterface dialog, int which) {
                                                 dialog.cancel();
-                                           //     Intent intent = new Intent(getApplicationContext(), User_Login.class);
-                                            //    intent.putExtra("userid", idgenerated);
+                                            //    Intent intent = new Intent(getApplicationContext(), User_Login.class);
+                                              //  intent.putExtra("userid", idgenerated);
                                              //   startActivity(intent);
                                             }
                                         });

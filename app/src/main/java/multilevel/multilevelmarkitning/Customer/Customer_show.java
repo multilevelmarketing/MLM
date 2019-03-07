@@ -1,9 +1,11 @@
 package multilevel.multilevelmarkitning.Customer;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -51,6 +53,19 @@ public class Customer_show extends AppCompatActivity {
         editor=pref.edit();
         id=pref.getString("customerid",null);
         tvid.setText(pref.getString("customerid",null));
+
+
+
+
+
+        update.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent it=new Intent(getApplicationContext(),Customer_update.class);
+                it.putExtra("id",id);
+                startActivity(it);
+            }
+        });
 
 
 
@@ -120,4 +135,6 @@ public class Customer_show extends AppCompatActivity {
             return paremeters;
         }
     }
+
+
 }

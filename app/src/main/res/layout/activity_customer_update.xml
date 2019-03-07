@@ -25,7 +25,7 @@
                 android:layout_marginLeft="70dp"
                 android:text="Customer Update"
                 android:textColor="#fff"
-                android:textSize="40dp" />
+                android:textSize="30dp" />
 
 
             <TextView
@@ -37,7 +37,7 @@
                 android:textSize="20dp" />
 
             <EditText
-                android:id="@+id/cus_id"
+                android:id="@+id/cusupdate_id"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
@@ -54,7 +54,7 @@
                 android:textSize="20dp" />
 
             <EditText
-                android:id="@+id/cus_username"
+                android:id="@+id/cusupdate_username"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
@@ -71,7 +71,7 @@
                 android:textSize="20dp" />
 
             <EditText
-                android:id="@+id/cus_profe"
+                android:id="@+id/cusupdate_prof"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
@@ -89,7 +89,7 @@
                 android:textSize="20dp" />
 
             <EditText
-                android:id="@+id/cus_parent"
+                android:id="@+id/cusupdate_parent"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
@@ -105,7 +105,7 @@
                 android:textSize="20dp" />
 
             <EditText
-                android:id="@+id/cus_pass"
+                android:id="@+id/cusupdate_pass"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
@@ -123,7 +123,7 @@
 
 
             <EditText
-                android:id="@+id/cus_emailid"
+                android:id="@+id/cusupdate_emailid"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
@@ -140,7 +140,7 @@
                 android:textSize="20dp" />
 
             <EditText
-                android:id="@+id/cus_usermobile"
+                android:id="@+id/cusupdate_usermobile"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
@@ -157,7 +157,7 @@
                 android:textSize="20dp" />
 
             <Spinner
-                android:id="@+id/cus_gender"
+                android:id="@+id/cusupdate_gender"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
@@ -166,6 +166,7 @@
                 android:textColor="#fff">
 
             </Spinner>
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -175,7 +176,7 @@
                 android:textSize="20dp" />
 
             <EditText
-                android:id="@+id/cus_addres"
+                android:id="@+id/cusupdate_addres"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
@@ -187,8 +188,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
-                android:hint="Update"
-                 />
+                android:hint="Update" />
 
 
         </LinearLayout>

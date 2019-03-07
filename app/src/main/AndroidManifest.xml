@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="multilevel.multilevelmarkitning">
 
+
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
@@ -12,7 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".Customer.Customer_show"></activity>
-        <activity android:name=".Customer.customer_update" />
+        <activity android:name=".Customer.Customer_update" />
         <activity android:name=".Admin.Admin_Update" />
         <activity android:name=".Admin.User_Show" />
         <activity android:name=".Admin.Admin_Profile" />
