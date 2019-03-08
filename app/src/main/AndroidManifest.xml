@@ -12,7 +12,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Customer.Customer_show"></activity>
+        <activity android:name=".Customer.Customer_show"
+            android:parentActivityName=".Customer.Customer_Home_Page">
+
+        </activity>
         <activity android:name=".Customer.Customer_update" />
         <activity android:name=".Admin.Admin_Update" />
         <activity android:name=".Admin.User_Show" />
@@ -20,7 +23,8 @@
         <activity android:name=".Admin.Admin_Panel" />
         <activity android:name=".Admin.Admin_Login" />
         <activity android:name=".Customer.Customer_Home_Page" />
-        <activity android:name=".Customer.Purchase_Commision" />
+        <activity android:name=".Customer.Purchase_Commision"
+            android:parentActivityName=".Customer.Customer_Home_Page"/>
         <activity
             android:name=".User.User_Show"
             android:label="@string/title_activity_user__show"

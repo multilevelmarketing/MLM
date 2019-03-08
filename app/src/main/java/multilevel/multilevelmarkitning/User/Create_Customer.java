@@ -1,6 +1,7 @@
 package multilevel.multilevelmarkitning.User;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -26,8 +27,8 @@ import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.UUID;
 
+import multilevel.multilevelmarkitning.Customer.Customer_Login;
 import multilevel.multilevelmarkitning.IdGenerator;
 import multilevel.multilevelmarkitning.R;
 import multilevel.multilevelmarkitning.Validation;
@@ -119,9 +120,9 @@ public class Create_Customer extends AppCompatActivity {
                                             @Override
                                             public void onClick(DialogInterface dialog, int which) {
                                                 dialog.cancel();
-                                            //    Intent intent = new Intent(getApplicationContext(), User_Login.class);
-                                              //  intent.putExtra("userid", idgenerated);
-                                             //   startActivity(intent);
+                                                Intent intent = new Intent(getApplicationContext(), Customer_Login.class);
+                                                intent.putExtra("userid", idgenerated);
+                                                startActivity(intent);
                                             }
                                         });
 

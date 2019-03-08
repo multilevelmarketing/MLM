@@ -2,8 +2,9 @@ package multilevel.multilevelmarkitning.Customer;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -22,8 +23,6 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
-import multilevel.multilevelmarkitning.Admin.Admin_Profile;
-import multilevel.multilevelmarkitning.Admin.Admin_Update;
 import multilevel.multilevelmarkitning.R;
 
 public class Customer_show extends AppCompatActivity {
@@ -33,6 +32,7 @@ public class Customer_show extends AppCompatActivity {
     RequestQueue requestQueue;
     SharedPreferences pref;
     SharedPreferences.Editor editor;
+    ActionBar actionBar;
     String id=new String();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +53,9 @@ public class Customer_show extends AppCompatActivity {
         editor=pref.edit();
         id=pref.getString("customerid",null);
         tvid.setText(pref.getString("customerid",null));
+        actionBar=getSupportActionBar();
+        actionBar.setTitle("Customer Profile");
+        actionBar.setDisplayHomeAsUpEnabled(true);
 
 
 

@@ -29,6 +29,7 @@ import multilevel.multilevelmarkitning.R;
 
 public class Customer_Login extends AppCompatActivity {
 
+    Intent intent;
     EditText userid;
     EditText password;
     Button loginbtn;
@@ -57,9 +58,17 @@ public class Customer_Login extends AppCompatActivity {
         progressDialog=new ProgressDialog(this);
 //        loginPrefsEditor.putString("username","");
 //        loginPrefsEditor.putString("password","");
+        intent=getIntent();
+        if(intent!=null)
+        {
+            userid.setText(intent.getStringExtra("userid"));
+        }
+        else
+        {
+            userid.setText(loginPreferences.getString("username",null));
+            password.setText(loginPreferences.getString("password",null));
+        }
 
-        userid.setText(loginPreferences.getString("username",null));
-        password.setText(loginPreferences.getString("password",null));
 
 
 

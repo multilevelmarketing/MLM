@@ -71,6 +71,7 @@ public class Customer_update extends AppCompatActivity {
                         editTextid.setText(new JSONObject(response).getString("RegId"));
                         editTextname.setText(new JSONObject(response).getString("RegName"));
                         editTextprofession.setText(new JSONObject(response).getString("RegProfession"));
+                        editTextpassword.setText(new JSONObject(response).getString("RegPassword"));
                      //   .setText(new JSONObject(response).getString("RegLevel"));
                         editTextparentid.setText(new JSONObject(response).getString("RegParent"));
                         editTextemail.setText(new JSONObject(response).getString("RegEmail"));
