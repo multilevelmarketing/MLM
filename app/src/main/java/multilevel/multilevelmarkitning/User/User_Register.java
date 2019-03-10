@@ -3,10 +3,9 @@ package multilevel.multilevelmarkitning.User;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.support.annotation.Nullable;
+import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -18,14 +17,10 @@ import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
-import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.util.Map;
-import java.util.UUID;
 
 import multilevel.multilevelmarkitning.IdGenerator;
 import multilevel.multilevelmarkitning.R;
@@ -33,7 +28,7 @@ import multilevel.multilevelmarkitning.Validation;
 
 public class User_Register extends AppCompatActivity {
 
-    EditText user_id,user_name,company,password,email,mobile,user_address;
+    EditText user_name,company,password,email,mobile,user_address;
     Button submit;
     AlertDialog.Builder builder;
     private ProgressDialog pDialog;
@@ -44,7 +39,6 @@ public class User_Register extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user__register);
-        user_id=(EditText)findViewById(R.id.user_id);
         user_name=(EditText)findViewById(R.id.user_reg_id);
         company=(EditText)findViewById(R.id.user_reg_cname);
         email=(EditText)findViewById(R.id.user_reg_email);
@@ -60,8 +54,9 @@ public class User_Register extends AppCompatActivity {
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String Id=user_id.getText().toString().trim();
+
                 final String User_Name=user_name.getText().toString().trim();
+                final String Id=IdGenerator.generateId(User_Name);
                 String Company=company.getText().toString().trim();
                 String Email=email.getText().toString().trim();
                 String Password=password.getText().toString().trim();
@@ -114,16 +109,16 @@ public class User_Register extends AppCompatActivity {
                                         //  Toast.makeText(Admin_Register.this, "Account Successfully Created", Toast.LENGTH_LONG).show();
 
                                      //   final String idgenerated = UUID.randomUUID().toString();
-                                        final String idgenerated = IdGenerator.generateId(User_Name);
+                                      //  final String idgenerated = IdGenerator.generateId(User_Name);
 
-                                        builder.setMessage("Your ID is "+idgenerated);
+                                        builder.setMessage("Your ID is "+Id);
                                         builder.setCancelable(true);
                                         builder.setPositiveButton("ok", new DialogInterface.OnClickListener() {
                                             @Override
                                             public void onClick(DialogInterface dialog, int which) {
                                                 dialog.cancel();
                                                 Intent intent=new Intent(getApplicationContext(),User_Login.class);
-                                                intent.putExtra("userid",idgenerated);
+                                                intent.putExtra("userid",Id);
                                                 startActivity(intent);
                                             }
                                         });

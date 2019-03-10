@@ -3,8 +3,8 @@ package multilevel.multilevelmarkitning.User;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -26,11 +26,7 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
-import multilevel.multilevelmarkitning.Customer.Customer_Home_Page;
-import multilevel.multilevelmarkitning.Customer.Customer_Login;
 import multilevel.multilevelmarkitning.R;
-
-import static android.text.TextUtils.*;
 
 public class User_Login extends AppCompatActivity {
     EditText username;
@@ -44,30 +40,31 @@ public class User_Login extends AppCompatActivity {
     private SharedPreferences loginPreferences;
     private SharedPreferences.Editor loginPrefsEditor;
     RequestQueue requestQueue;
+    //Intent intent;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user__login);
-        intent=this.getIntent();
+        intent=getIntent();
         username=(EditText)findViewById(R.id.user_userid);
         checkBox=(CheckBox)findViewById(R.id.user_checkBox);
         progressDialog=new ProgressDialog(this);
         requestQueue = Volley.newRequestQueue(this);
-        if(intent!=null) {
-            usrid = intent.getStringExtra("userid");
-            //Toast.makeText(getApplicationContext(),usrid,Toast.LENGTH_SHORT).show();
-            username.setText(usrid);
-        }
+        loginPreferences=getSharedPreferences("userLogin",MODE_PRIVATE);
+        loginPrefsEditor=loginPreferences.edit();
         userpassword=(EditText)findViewById(R.id.user_userpassword);
         usersigup=(TextView)findViewById(R.id.user_usersignup);
         userbtn=(Button)findViewById(R.id.user_usersubmit);
-        loginPreferences=getSharedPreferences("userLogin",MODE_PRIVATE);
-        loginPrefsEditor=loginPreferences.edit();
-
-        username.setText(loginPreferences.getString("username",null));
-        userpassword.setText(loginPreferences.getString("password",null));
-
-
+        if(intent.getStringExtra("userid")!=null) {
+            //usrid = intent.getStringExtra("userid");
+            //Toast.makeText(getApplicationContext(),usrid,Toast.LENGTH_SHORT).show();
+            username.setText(intent.getStringExtra("userid"));
+        }
+        else
+        {
+            username.setText(loginPreferences.getString("username",null));
+            userpassword.setText(loginPreferences.getString("password",null));
+        }
 
         usersigup.setOnClickListener(new View.OnClickListener() {
             @Override
