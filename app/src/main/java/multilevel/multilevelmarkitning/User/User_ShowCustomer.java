@@ -1,6 +1,7 @@
 package multilevel.multilevelmarkitning.User;
 
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.ListView;
 
@@ -31,7 +32,10 @@ public class User_ShowCustomer extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user__show_customer);
         listView=(ListView)findViewById(R.id.cusShow_list);
-
+        StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder().permitNetwork().build());
+        getData();
+        ListAdapter listAdapter=new ListAdapter(User_ShowCustomer.this,title,subtitle);
+        listView.setAdapter(listAdapter);
 
 
 
@@ -51,7 +55,7 @@ public class User_ShowCustomer extends AppCompatActivity {
         try {
             BufferedReader bf=new BufferedReader(new InputStreamReader(in));
             sb=new StringBuffer();
-            while(line=bf.readLine()!=null)
+            while((line=bf.readLine())!=null)
             {
                 sb.append(line+"\n");
             }
@@ -70,8 +74,12 @@ public class User_ShowCustomer extends AppCompatActivity {
             {
                 jsonObject=jsonArray.getJSONObject(i);
                 title.add(jsonObject.getString("ID"));
-                subtitle.add(jsonObject.getString(""))
+                subtitle.add(jsonObject.getString("Name"));
             }
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
         }
 
     }

@@ -57,7 +57,8 @@ public class User_Show extends AppCompatActivity
             startActivity(new Intent(this,Create_Customer.class));
             // Handle the camera action
         } else if (id == R.id.nav_customer_show) {
-            
+            startActivity(new Intent(this,User_ShowCustomer.class));
+
 
         } else if (id == R.id.nav_logout) {
 
