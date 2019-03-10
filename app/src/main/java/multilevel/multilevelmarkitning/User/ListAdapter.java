@@ -16,7 +16,7 @@ public class ListAdapter extends ArrayAdapter<String> {
     private  final ArrayList<String> maintitle;
     private  final ArrayList<String> subtitle;
 
-    public ListAdapter(Activity context, ArrayList maintitle, ArrayList subtitle) {
+    public ListAdapter(Activity context, ArrayList<String> maintitle, ArrayList<String> subtitle) {
         super(context, R.layout.user_cus_showlistitems,maintitle);
         this.maintitle = maintitle;
         this.subtitle = subtitle;

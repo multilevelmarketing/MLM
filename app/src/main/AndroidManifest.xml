@@ -11,7 +11,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".User.User_ShowCustomer"></activity>
+        <activity android:name=".User.User_ShowCustomer"
+            android:parentActivityName=".User.User_Show"/>
         <activity
             android:name=".Customer.Customer_show"
             android:parentActivityName=".Customer.Customer_Home_Page"></activity>
@@ -41,6 +42,8 @@
         <activity android:name=".User.User_Login" />
         <activity android:name=".User.User_Register" />
         <activity android:name=".User.Create_Customer" />
+
+
     </application>
 
 </manifest>

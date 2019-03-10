@@ -25,7 +25,7 @@ import java.util.Map;
 
 import multilevel.multilevelmarkitning.R;
 
-public class Customer_update extends AppCompatActivity {
+ class Customer_update extends AppCompatActivity {
 
     Intent intent;
     RequestQueue requestQueue;
