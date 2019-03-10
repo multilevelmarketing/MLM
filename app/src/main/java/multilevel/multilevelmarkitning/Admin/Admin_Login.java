@@ -3,8 +3,9 @@ package multilevel.multilevelmarkitning.Admin;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -40,6 +41,8 @@ public class Admin_Login extends AppCompatActivity {
     private SharedPreferences.Editor loginPrefsEditor;
     ProgressDialog progressDialog;
     Intent intent;
+    ActionBar actionBar;
+
 
 
     @Override
@@ -55,6 +58,9 @@ public class Admin_Login extends AppCompatActivity {
         loginPreferences=getSharedPreferences("adminLogin",MODE_PRIVATE);
         loginPrefsEditor=loginPreferences.edit();
         intent=getIntent();
+        actionBar=getSupportActionBar();
+        actionBar.setTitle("AdminLogin");
+        actionBar.setDisplayHomeAsUpEnabled(true);
         String intentid=intent.getStringExtra("userid");
         if(intentid!=null)
         {
