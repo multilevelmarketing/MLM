@@ -4,6 +4,9 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.ListView;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -17,10 +20,12 @@ import multilevel.multilevelmarkitning.R;
 public class User_ShowCustomer extends AppCompatActivity {
 
     ListView listView;
-    ArrayList<String> title;
-    ArrayList<String> subtitle;
+    ArrayList<String> title=new ArrayList<String>();
+    ArrayList<String> subtitle=new ArrayList<String>();
     InputStream in;
     String line;
+    String result;
+    StringBuffer sb;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,14 +50,28 @@ public class User_ShowCustomer extends AppCompatActivity {
        }
         try {
             BufferedReader bf=new BufferedReader(new InputStreamReader(in));
+            sb=new StringBuffer();
             while(line=bf.readLine()!=null)
             {
-
+                sb.append(line+"\n");
             }
+            in.close();
+            result=sb.toString();
+
         }
         catch (Exception e)
         {
             e.printStackTrace();
+        }
+        try{
+            JSONArray jsonArray=new JSONArray(result);
+            JSONObject jsonObject=null;
+            for(int i=0;i<jsonArray.length();i++)
+            {
+                jsonObject=jsonArray.getJSONObject(i);
+                title.add(jsonObject.getString("ID"));
+                subtitle.add(jsonObject.getString(""))
+            }
         }
 
     }
