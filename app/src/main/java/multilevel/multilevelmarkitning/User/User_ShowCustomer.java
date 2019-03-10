@@ -2,6 +2,7 @@ package multilevel.multilevelmarkitning.User;
 
 import android.os.Bundle;
 import android.os.StrictMode;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.ListView;
 
@@ -27,6 +28,7 @@ public class User_ShowCustomer extends AppCompatActivity {
     String line;
     String result;
     StringBuffer sb;
+    ActionBar actionBar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,6 +38,9 @@ public class User_ShowCustomer extends AppCompatActivity {
         getData();
         ListAdapter listAdapter=new ListAdapter(User_ShowCustomer.this,title,subtitle);
         listView.setAdapter(listAdapter);
+        actionBar=getSupportActionBar();
+        actionBar.setTitle("Customers");
+        actionBar.setDisplayHomeAsUpEnabled(true);
 
 
 
