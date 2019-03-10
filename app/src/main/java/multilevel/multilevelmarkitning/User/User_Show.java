@@ -61,6 +61,8 @@ public class User_Show extends AppCompatActivity
 
 
         } else if (id == R.id.nav_logout) {
+            finish();
+            startActivity(new Intent(this,User_Login.class));
 
         }
 
