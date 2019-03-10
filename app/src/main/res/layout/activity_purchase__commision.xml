@@ -14,15 +14,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:orientation="vertical">
-
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Purchase And Commission"
-        android:textSize="32dp"
-        android:layout_marginTop="60dp"
-        android:textColor="#fff"/>
+      
 
     <EditText
         android:layout_width="match_parent"

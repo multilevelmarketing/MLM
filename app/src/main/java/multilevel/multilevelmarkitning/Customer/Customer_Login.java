@@ -59,7 +59,7 @@ public class Customer_Login extends AppCompatActivity {
 //        loginPrefsEditor.putString("username","");
 //        loginPrefsEditor.putString("password","");
         intent=getIntent();
-        if(intent!=null)
+        if(intent.getStringExtra("userid")!=null)
         {
             userid.setText(intent.getStringExtra("userid"));
         }
