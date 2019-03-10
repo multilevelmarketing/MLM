@@ -26,7 +26,7 @@
                 android:textColor="#fff"/>
 
             <EditText
-                android:id="@+id/user_reg_id"
+                android:id="@+id/admin_reg_id"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
@@ -35,7 +35,7 @@
                 android:textColorHint="#ffff" />
 
             <EditText
-                android:id="@+id/user_reg_cname"
+                android:id="@+id/admin_reg_cname"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
@@ -44,7 +44,7 @@
                 android:textColorHint="#ffff" />
 
             <EditText
-                android:id="@+id/user_reg_pass"
+                android:id="@+id/admin_reg_pass"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
@@ -55,7 +55,7 @@
 
 
             <EditText
-                android:id="@+id/user_reg_email"
+                android:id="@+id/admin_reg_email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
@@ -65,7 +65,7 @@
                 android:textColorHint="#ffff" />
 
             <EditText
-                android:id="@+id/user_usermobile"
+                android:id="@+id/admin_usermobile"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
@@ -103,7 +103,7 @@
             </RadioGroup>
 
             <EditText
-                android:id="@+id/user_addres"
+                android:id="@+id/admin_addres"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Address"
@@ -111,7 +111,7 @@
                 android:layout_margin="10dp"
                 android:background="@drawable/customedittext"/>
             <Button
-                android:id="@+id/user_sumitbtn"
+                android:id="@+id/admin_sumitbtn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"

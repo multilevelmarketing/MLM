@@ -139,9 +139,6 @@ public class Admin_Login extends AppCompatActivity {
                                       editor.putBoolean("IsLogin", true);
                                       editor.commit();
 
-
-
-
                                       Intent intent=new Intent(getApplicationContext(), Admin_Panel.class);
                                       startActivity(intent);
                                   }

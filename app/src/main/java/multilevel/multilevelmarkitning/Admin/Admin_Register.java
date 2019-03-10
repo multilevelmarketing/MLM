@@ -47,13 +47,13 @@ public class Admin_Register extends AppCompatActivity {
         setContentView(R.layout.activity_admin__register);
 
       //  user_id=(EditText)findViewById(R.id.user_id);
-        user_name=(EditText)findViewById(R.id.user_reg_id);
-        company=(EditText)findViewById(R.id.user_reg_cname);
-        email=(EditText)findViewById(R.id.user_reg_email);
-        password=(EditText)findViewById(R.id.user_reg_pass);
-        mobile=(EditText)findViewById(R.id.user_usermobile);
-        submit=(Button)findViewById(R.id.user_sumitbtn);
-        user_address=(EditText)findViewById(R.id.user_addres);
+        user_name=(EditText)findViewById(R.id.admin_reg_id);
+        company=(EditText)findViewById(R.id.admin_reg_cname);
+        email=(EditText)findViewById(R.id.admin_reg_email);
+        password=(EditText)findViewById(R.id.admin_reg_pass);
+        mobile=(EditText)findViewById(R.id.admin_usermobile);
+        submit=(Button)findViewById(R.id.admin_sumitbtn);
+        user_address=(EditText)findViewById(R.id.admin_addres);
         radioGroupsex=(RadioGroup)findViewById(R.id.radiogroup);
         builder= new AlertDialog.Builder(this);
 
@@ -63,8 +63,9 @@ public class Admin_Register extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                // String Id=user_id.getText().toString().trim();
-                final String User_Name=user_name.getText().toString().trim();
-                final String idgenerated = IdGenerator.generateId(User_Name);
+               final  String User_Name=user_name.getText().toString().trim();
+               //final String idgenerated = IdGenerator.generateId(User_Name);
+                final String idgenerated="1207";
                 String Company=company.getText().toString().trim();
                 String Email=email.getText().toString().trim();
                 String Password=password.getText().toString().trim();
