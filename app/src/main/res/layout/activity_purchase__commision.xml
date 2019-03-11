@@ -34,7 +34,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:background="@drawable/customedittext"
-        android:minHeight="35dp"
+        android:minHeight="30dp"
         android:tooltipText="Select Product type"
         />
       <Spinner
@@ -43,7 +43,7 @@
           android:layout_height="wrap_content"
           android:layout_margin="10dp"
           android:background="@drawable/customedittext"
-          android:minHeight="35dp"
+          android:minHeight="30dp"
           android:tooltipText="Select Product Name"
           />
 

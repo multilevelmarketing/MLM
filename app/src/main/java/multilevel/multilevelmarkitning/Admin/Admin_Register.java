@@ -56,7 +56,7 @@ public class Admin_Register extends AppCompatActivity {
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String Id=user_id.getText().toString().trim();
+               // String Id=user_id.getText().toString().trim();
                 final String User_Name=user_name.getText().toString().trim();
                 final String idgenerated = IdGenerator.generateId(User_Name);
                 String Company=company.getText().toString().trim();
