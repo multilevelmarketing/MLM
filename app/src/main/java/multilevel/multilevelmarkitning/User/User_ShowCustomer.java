@@ -1,6 +1,8 @@
 package multilevel.multilevelmarkitning.User;
 
 import android.os.Bundle;
+import android.os.StrictMode;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.ListView;
 
@@ -26,32 +28,39 @@ public class User_ShowCustomer extends AppCompatActivity {
     String line;
     String result;
     StringBuffer sb;
+    ActionBar actionBar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user__show_customer);
         listView=(ListView)findViewById(R.id.cusShow_list);
-
+        StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder().permitNetwork().build());
+        getData();
+        ListAdapter listAdapter=new ListAdapter(User_ShowCustomer.this,title,subtitle);
+        listView.setAdapter(listAdapter);
+        actionBar=getSupportActionBar();
+        actionBar.setTitle("Customers");
+        actionBar.setDisplayHomeAsUpEnabled(true);
 
 
 
     }
-   /*void getData()
-   {
-       try {
-           URL url=new URL("https://veiled-heat.000webhostapp.com/MLM/Customer/CustomerShowAll.php");
-           HttpURLConnection con=(HttpURLConnection)url.openConnection();
-           con.setRequestMethod("GET");
-           in=new BufferedInputStream(con.getInputStream());
-       }
-       catch (Exception e)
-       {
-           e.printStackTrace();
-       }
+    void getData()
+    {
+        try {
+            URL url=new URL("https://veiled-heat.000webhostapp.com/MLM/Customer/CustomerShowAll.php");
+            HttpURLConnection con=(HttpURLConnection)url.openConnection();
+            con.setRequestMethod("GET");
+            in=new BufferedInputStream(con.getInputStream());
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
         try {
             BufferedReader bf=new BufferedReader(new InputStreamReader(in));
             sb=new StringBuffer();
-            while(line=bf.readLine()!=null)
+            while((line=bf.readLine())!=null)
             {
                 sb.append(line+"\n");
             }
@@ -70,11 +79,13 @@ public class User_ShowCustomer extends AppCompatActivity {
             {
                 jsonObject=jsonArray.getJSONObject(i);
                 title.add(jsonObject.getString("ID"));
-                subtitle.add(jsonObject.getString(""))
+                subtitle.add(jsonObject.getString("Name"));
             }
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
         }
 
     }
-
-    */
 }

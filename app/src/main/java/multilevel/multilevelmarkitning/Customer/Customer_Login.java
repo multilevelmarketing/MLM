@@ -50,12 +50,15 @@ public class Customer_Login extends AppCompatActivity {
         password=(EditText)findViewById(R.id.cus_login_password);
         loginbtn=(Button) findViewById(R.id.cus_login_btn);
         checkBox=(CheckBox)findViewById(R.id.cus_checkBox);
+
+
         requestQueue = Volley.newRequestQueue(Customer_Login.this);
         loginPreferences=getSharedPreferences("customerLogin",MODE_PRIVATE);
         loginPrefsEditor=loginPreferences.edit();
         actionBar=getSupportActionBar();
         actionBar.setTitle("CustomerLogin");
         actionBar.setDisplayHomeAsUpEnabled(true);
+
 
         pref=getSharedPreferences("cusLogin",MODE_PRIVATE);
         editor=pref.edit();
@@ -85,9 +88,10 @@ public class Customer_Login extends AppCompatActivity {
             public void onClick(View v) {
                 String UserID=userid.getText().toString().trim();
                 String Password=password.getText().toString().trim();
-
                 editor.putString("customerid",UserID);
                 editor.commit();
+
+
                 if(TextUtils.isEmpty(UserID) && TextUtils.isEmpty(Password))
                 {
                     userid.setError("please fill the fields");

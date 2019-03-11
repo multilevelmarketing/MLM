@@ -9,12 +9,15 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.widget.Spinner;
 
 import multilevel.multilevelmarkitning.R;
 
-public class User_Show extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener
+public class User_Show extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener
 {
+
+    Spinner spinner;
+    String[] levelarray;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -32,6 +35,8 @@ public class User_Show extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+
     }
 
     @Override

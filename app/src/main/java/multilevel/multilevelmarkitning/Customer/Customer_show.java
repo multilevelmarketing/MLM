@@ -49,10 +49,13 @@ public class Customer_show extends AppCompatActivity {
         tvgender=(TextView)findViewById(R.id.cus_profile_gender);
         update=(Button)findViewById(R.id.cus_profile_update);
         requestQueue= Volley.newRequestQueue(this);
+
         pref=getSharedPreferences("cusLogin",MODE_PRIVATE);
         editor=pref.edit();
+
         id=pref.getString("customerid",null);
         tvid.setText(pref.getString("customerid",null));
+
         actionBar=getSupportActionBar();
         actionBar.setTitle("Customer Profile");
         actionBar.setDisplayHomeAsUpEnabled(true);

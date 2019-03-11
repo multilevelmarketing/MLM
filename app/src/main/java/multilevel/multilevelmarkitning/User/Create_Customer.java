@@ -2,18 +2,24 @@ package multilevel.multilevelmarkitning.User;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -22,9 +28,14 @@ import com.android.volley.Response;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -35,20 +46,17 @@ import multilevel.multilevelmarkitning.Validation;
 
 public class Create_Customer extends AppCompatActivity {
     Spinner spinner;
-    String[] level = {"Level 1", "Level 2", "Level 3", "Level 4", "Level 5"};
-    EditText name;
-
-    EditText location;
-    EditText profession;
-    EditText mobile;
+    String[] level;
+    EditText name,location,profession,mobile,password,email;
     Button createbtn;
-    EditText password;
-    EditText email;
     private RadioGroup radioSexGroup;
     private RadioButton radioSexButton;
     RequestQueue requestQueue;
-
+    String Level;
     AlertDialog.Builder builder;
+    SharedPreferences pref;
+    SharedPreferences.Editor editor;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,24 +67,56 @@ public class Create_Customer extends AppCompatActivity {
         location = (EditText) findViewById(R.id.cus_user_address);
         profession = (EditText) findViewById(R.id.cus_user_profession);
         mobile = (EditText) findViewById(R.id.cus_user_mobile);
-        spinner = (Spinner) findViewById(R.id.level);
+
+
+        pref=getSharedPreferences("userLogin",MODE_PRIVATE);
+        editor=pref.edit();
+
+        final String parent=pref.getString("username",null);
+
         radioSexGroup = (RadioGroup) findViewById(R.id.cus_radiogrp);
         password = (EditText) findViewById(R.id.cus_user_password);
         email = (EditText) findViewById(R.id.cus_user_email);
         createbtn = (Button) findViewById(R.id.create_cus_btn);
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, R.layout.support_simple_spinner_dropdown_item, level);
-        spinner.setAdapter(arrayAdapter);
+
+        spinner = (Spinner) findViewById(R.id.level);
+
+        spinnerfunction();
+
+
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                Level=((TextView)view).getText().toString();
+
+
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+
+
+
+
+
+
         requestQueue = Volley.newRequestQueue(Create_Customer.this);
 
 
         createbtn.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onClick(View v) {
                 String Name = name.getText().toString().trim();
                 String Location = location.getText().toString().trim();
                 String Profession = profession.getText().toString().trim();
                 String Mobile = mobile.getText().toString().trim();
-                String Level = spinner.getSelectedItem().toString().trim();
                 String Password = password.getText().toString().trim();
                 String Email = email.getText().toString().trim();
 
@@ -86,25 +126,25 @@ public class Create_Customer extends AppCompatActivity {
                 }
                 else {
                     if (Password.length() < 6) {
-                        //Toast.makeText(getApplicationContext(),"password must be atleast 6 characters",Toast.LENGTH_SHORT).show();
+
                         password.setError("password must be atleast 6 characters");
                     } else if (!Validation.emailValidation(Email)) {
-                        //  Toast.makeText(getApplicationContext(),"please enter a valid email address",Toast.LENGTH_SHORT).show();
+
                         email.setError("please enter a valid email address");
                     } else if (!Validation.mobileValidation(Mobile)) {
                         mobile.setError("please enter a valid mobile number");
                     } else if (radioSexGroup.getCheckedRadioButtonId() == -1) {
                         Toast.makeText(getApplicationContext(), "Please select your gender", Toast.LENGTH_SHORT).show();
-                    } else {
-                        // String idgenerated=java.time.LocalDate.now().toString()+java.time.LocalTime.now().toString()+name.getText().toString().trim();
+                    } else
+                        {
                         int selectedId = radioSexGroup.getCheckedRadioButtonId();
                         radioSexButton = (RadioButton) findViewById(selectedId);
                         String sex = radioSexButton.getText().toString().trim();
-                 //       final String idgenerated = UUID.randomUUID().toString();
+
                         final String idgenerated = IdGenerator.generateId(Name);
 
 
-                        CustomerRegister registerRequest = new CustomerRegister(idgenerated, Name, Mobile, Email, Password, Profession, Level, sex, Location, new Response.Listener<String>() {
+                        CustomerRegister registerRequest = new CustomerRegister(idgenerated, Name, Mobile, Email, Password, Profession, Level, sex, Location,parent, new Response.Listener<String>() {
                             @Override
                             public void onResponse(String response) {
                                 Log.i("Response", response);
@@ -131,7 +171,7 @@ public class Create_Customer extends AppCompatActivity {
                                         alertDialog.show();
 
 
-                                        //finish();
+
                                     } else
                                         Toast.makeText(Create_Customer.this, "Something Has Happened. Please Try Again!", Toast.LENGTH_SHORT).show();
                                 } catch (JSONException e) {
@@ -156,7 +196,7 @@ public class Create_Customer extends AppCompatActivity {
         private static final String REGISTER_URL = "https://veiled-heat.000webhostapp.com/MLM/Customer/customer_reg.php";
         private Map<String, String> parameters;
 
-        public CustomerRegister(String id,String name, String mobile, String email, String password,String professsion,String level,String gender,String location, Response.Listener<String> listener) {
+        public CustomerRegister(String id,String name, String mobile, String email, String password,String professsion,String level,String gender,String location,String Parent, Response.Listener<String> listener) {
             super(Method.POST, REGISTER_URL, listener, null);
             parameters = new HashMap<>();
             parameters.put("name", name);
@@ -168,6 +208,7 @@ public class Create_Customer extends AppCompatActivity {
             parameters.put("level", level);
             parameters.put("gender", gender);
             parameters.put("location", location);
+            parameters.put("parent",Parent);
 
         }
 
@@ -178,6 +219,67 @@ public class Create_Customer extends AppCompatActivity {
         }
     }
 
+
+    private void spinnerfunction() {
+
+
+        getJSON("https://veiled-heat.000webhostapp.com/MLM/User/levelfetch.php");
+
+    }
+
+    private void getJSON(final String urlWebService) {
+
+        class GetJSON extends AsyncTask<Void, Void, String> {
+
+            @Override
+            protected void onPreExecute() {
+                super.onPreExecute();
+            }
+
+            @Override
+            protected String doInBackground(Void... voids) {
+                try {
+                    URL url = new URL(urlWebService);
+                    HttpURLConnection con = (HttpURLConnection) url.openConnection();
+                    StringBuilder sb = new StringBuilder();
+                    BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(con.getInputStream()));
+                    String json;
+                    while ((json = bufferedReader.readLine()) != null) {
+                        sb.append(json + "\n");
+                    }
+                    return sb.toString().trim();
+                } catch (Exception e) {
+                    return null;
+                }
+            }
+
+            @Override
+            protected void onPostExecute(String s) {
+                super.onPostExecute(s);
+                //Toast.makeText(getApplicationContext(), s, Toast.LENGTH_SHORT).show();
+                try {
+                    loadIntoListView(s);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+
+        }
+        GetJSON getJSON = new GetJSON();
+        getJSON.execute();
+    }
+
+    private void loadIntoListView(String json) throws JSONException {
+        JSONArray jsonArray = new JSONArray(json);
+        level = new String[jsonArray.length()];
+        for (int i = 0; i < jsonArray.length(); i++) {
+            JSONObject obj = jsonArray.getJSONObject(i);
+            level[i] = obj.getString("Level");
+        }
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, level);
+        spinner.setAdapter(arrayAdapter);
+    }
 
 
 
@@ -199,10 +301,4 @@ public class Create_Customer extends AppCompatActivity {
 
 
 
-               //     });
-//                        AlertDialog alert=builder.create();
-//                        alert.setTitle("Successfully created");
-//                        alert.show();
-                     //   builder.create();
-              //  }
 

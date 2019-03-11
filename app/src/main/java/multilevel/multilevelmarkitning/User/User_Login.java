@@ -52,14 +52,21 @@ public class User_Login extends AppCompatActivity {
         checkBox=(CheckBox)findViewById(R.id.user_checkBox);
         progressDialog=new ProgressDialog(this);
         requestQueue = Volley.newRequestQueue(this);
+
+
         loginPreferences=getSharedPreferences("userLogin",MODE_PRIVATE);
         loginPrefsEditor=loginPreferences.edit();
+
+
+
         userpassword=(EditText)findViewById(R.id.user_userpassword);
         usersigup=(TextView)findViewById(R.id.user_usersignup);
         userbtn=(Button)findViewById(R.id.user_usersubmit);
+
         actionBar=getSupportActionBar();
         actionBar.setTitle("UserLogin");
         actionBar.setDisplayHomeAsUpEnabled(true);
+
         if(intent.getStringExtra("userid")!=null) {
             //usrid = intent.getStringExtra("userid");
             //Toast.makeText(getApplicationContext(),usrid,Toast.LENGTH_SHORT).show();
