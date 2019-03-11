@@ -116,7 +116,7 @@ public class Purchase_Commision extends AppCompatActivity {
         for (int i = 0; i < jsonArray.length(); i++) {
             JSONObject obj = jsonArray.getJSONObject(i);
             heroes[i] = obj.getString("Type");
-            System.out.println();
+         //   System.out.println();
         }
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, heroes);
         spinnerprocat.setAdapter(arrayAdapter);
