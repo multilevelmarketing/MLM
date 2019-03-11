@@ -7,10 +7,10 @@ public class IdGenerator {
 
     public static String generateId(String name)
     {
-        String id=new String();
+       // String id=new String();
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy_MM_dd_HH_mm_ss");
         LocalDateTime now = LocalDateTime.now();
-        String id=dtf.format(now).toString();
+        String id=dtf.format(now);
         id=id+name;
 //        Random random=new Random();
 //        int num=random.nextInt(2000);
