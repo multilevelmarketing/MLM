@@ -1,17 +1,20 @@
 package multilevel.multilevelmarkitning.Customer;
 
 import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -31,9 +34,8 @@ public class Purchase_Commision extends AppCompatActivity {
     String result;
     StringBuffer sb;
     Button btn;
-    private SharedPreferences loginPreferences;
-    private SharedPreferences.Editor loginPrefsEditor;
-
+    SharedPreferences sharedPreferences;
+    SharedPreferences.Editor editor;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,10 +49,11 @@ public class Purchase_Commision extends AppCompatActivity {
         editTextcompercent=(EditText)findViewById(R.id.cus_pur_commission);
         editTextproductcost=(EditText)findViewById(R.id.cus_pur_pro_cost);
         editTextproid=(EditText)findViewById(R.id.cus_pur_pro_id);
-        editTextcusid=(EditText)findViewById(R.id.cus_pur_pro_id);
-        loginPreferences=getSharedPreferences("customerLogin",MODE_PRIVATE);
-        loginPrefsEditor=loginPreferences.edit();
-        editTextcusid.setText(loginPreferences.getString("username",null));
+        editTextcusid=(EditText)findViewById(R.id.cus_pur_id);
+        sharedPreferences=getSharedPreferences("customerLogin",MODE_PRIVATE);
+        editor=sharedPreferences.edit();
+        editTextcusid.setText(sharedPreferences.getString("username",null));
+        getJSONProductCategory("https://veiled-heat.000webhostapp.com/MLM/Customer/prod_cat.php");
 
 
 
@@ -64,49 +67,57 @@ public class Purchase_Commision extends AppCompatActivity {
 
 
 
-    void getProductCategory()
-    {
-        try {
-            URL url=new URL("https://veiled-heat.000webhostapp.com/MLM/Customer/prod_cat.php");
-            HttpURLConnection con=(HttpURLConnection)url.openConnection();
-            con.setRequestMethod("GET");
-            in=new BufferedInputStream(con.getInputStream());
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-        }
-        try {
-            BufferedReader bf=new BufferedReader(new InputStreamReader(in));
-            sb=new StringBuffer();
-            while((line=bf.readLine())!=null)
-            {
-                sb.append(line+"\n");
+    private void getJSONProductCategory(final String urlWebService) {
+
+        class GetJSON extends AsyncTask<Void, Void, String> {
+
+            @Override
+            protected void onPreExecute() {
+                super.onPreExecute();
             }
-            in.close();
-            result=sb.toString();
 
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-        }
-        try{
-            JSONArray jsonArray=new JSONArray(result);
-            JSONObject jsonObject=null;
-            title=new String[jsonArray.length()];
-            for(int i=0;i<jsonArray.length();i++)
-            {
-                jsonObject=jsonArray.getJSONObject(i);
-                title[i]=jsonObject.getString("Type")
-              //  title.add(jsonObject.getString("Type"));
-
+            @Override
+            protected String doInBackground(Void... voids) {
+                try {
+                    URL url = new URL(urlWebService);
+                    HttpURLConnection con = (HttpURLConnection) url.openConnection();
+                    StringBuilder sb = new StringBuilder();
+                    BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(con.getInputStream()));
+                    String json;
+                    while ((json = bufferedReader.readLine()) != null) {
+                        sb.append(json + "\n");
+                    }
+                    return sb.toString().trim();
+                } catch (Exception e) {
+                    return null;
+                }
             }
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-        }
 
+            @Override
+            protected void onPostExecute(String s) {
+                super.onPostExecute(s);
+                Toast.makeText(getApplicationContext(), s, Toast.LENGTH_SHORT).show();
+                try {
+                    loadIntoListView(s);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+
+        }
+        GetJSON getJSON = new GetJSON();
+        getJSON.execute();
+    }
+
+    private void loadIntoListView(String json) throws JSONException {
+        JSONArray jsonArray = new JSONArray(json);
+        String[] heroes = new String[jsonArray.length()];
+        for (int i = 0; i < jsonArray.length(); i++) {
+            JSONObject obj = jsonArray.getJSONObject(i);
+            heroes[i] = obj.getString("Type");
+        }
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, heroes);
+        spinnerprocat.setAdapter(arrayAdapter);
     }
 }

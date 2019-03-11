@@ -3,9 +3,9 @@ package multilevel.multilevelmarkitning.Admin;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -13,7 +13,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
@@ -23,13 +22,8 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.UUID;
-
-import multilevel.multilevelmarkitning.Customer.Customer_Home_Page;
 import multilevel.multilevelmarkitning.IdGenerator;
 import multilevel.multilevelmarkitning.R;
-import multilevel.multilevelmarkitning.User.User_Login;
-import multilevel.multilevelmarkitning.User.User_Register;
 import multilevel.multilevelmarkitning.Validation;
 
 public class Admin_Register extends AppCompatActivity {
@@ -62,7 +56,7 @@ public class Admin_Register extends AppCompatActivity {
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               // String Id=user_id.getText().toString().trim();
+                String Id=user_id.getText().toString().trim();
                 final String User_Name=user_name.getText().toString().trim();
                 final String idgenerated = IdGenerator.generateId(User_Name);
                 String Company=company.getText().toString().trim();
