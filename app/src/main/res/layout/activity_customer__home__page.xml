@@ -38,7 +38,7 @@
                     android:id="@+id/Customer_comission"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Commission"
+                    android:text="Purchase"
                     android:layout_gravity="center"
                     android:textColor="#fff"
                     android:textSize="30dp"/>
