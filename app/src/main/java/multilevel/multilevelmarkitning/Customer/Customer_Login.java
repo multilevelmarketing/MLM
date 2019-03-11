@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
@@ -40,6 +41,7 @@ public class Customer_Login extends AppCompatActivity {
     private SharedPreferences.Editor loginPrefsEditor;
     private SharedPreferences pref;
     private SharedPreferences.Editor editor;
+    ActionBar actionBar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,6 +53,9 @@ public class Customer_Login extends AppCompatActivity {
         requestQueue = Volley.newRequestQueue(Customer_Login.this);
         loginPreferences=getSharedPreferences("customerLogin",MODE_PRIVATE);
         loginPrefsEditor=loginPreferences.edit();
+        actionBar=getSupportActionBar();
+        actionBar.setTitle("CustomerLogin");
+        actionBar.setDisplayHomeAsUpEnabled(true);
 
         pref=getSharedPreferences("cusLogin",MODE_PRIVATE);
         editor=pref.edit();

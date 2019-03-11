@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
@@ -40,6 +41,7 @@ public class User_Login extends AppCompatActivity {
     private SharedPreferences loginPreferences;
     private SharedPreferences.Editor loginPrefsEditor;
     RequestQueue requestQueue;
+    ActionBar actionBar;
     //Intent intent;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +57,9 @@ public class User_Login extends AppCompatActivity {
         userpassword=(EditText)findViewById(R.id.user_userpassword);
         usersigup=(TextView)findViewById(R.id.user_usersignup);
         userbtn=(Button)findViewById(R.id.user_usersubmit);
+        actionBar=getSupportActionBar();
+        actionBar.setTitle("UserLogin");
+        actionBar.setDisplayHomeAsUpEnabled(true);
         if(intent.getStringExtra("userid")!=null) {
             //usrid = intent.getStringExtra("userid");
             //Toast.makeText(getApplicationContext(),usrid,Toast.LENGTH_SHORT).show();

@@ -21,7 +21,8 @@
         <activity android:name=".Admin.User_Show" />
         <activity android:name=".Admin.Admin_Profile" />
         <activity android:name=".Admin.Admin_Panel" />
-        <activity android:name=".Admin.Admin_Login" />
+        <activity android:name=".Admin.Admin_Login"
+            android:parentActivityName=".MainActivity"/>
         <activity android:name=".Customer.Customer_Home_Page" />
         <activity
             android:name=".Customer.Purchase_Commision"
@@ -30,7 +31,8 @@
             android:name=".User.User_Show"
             android:label="@string/title_activity_user__show"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".Customer.Customer_Login" />
+        <activity android:name=".Customer.Customer_Login"
+            android:parentActivityName=".MainActivity"/>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -39,7 +41,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".Admin.Admin_Register" />
-        <activity android:name=".User.User_Login" />
+        <activity android:name=".User.User_Login"
+            android:parentActivityName=".MainActivity"/>
         <activity android:name=".User.User_Register" />
         <activity android:name=".User.Create_Customer" />
 
