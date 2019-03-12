@@ -46,7 +46,7 @@ import multilevel.multilevelmarkitning.Validation;
 
 public class Create_Customer extends AppCompatActivity {
     Spinner spinner;
-    String[] level;
+    String[] arr={"1"};
     EditText name,location,profession,mobile,password,email;
     Button createbtn;
     private RadioGroup radioSexGroup;
@@ -81,7 +81,8 @@ public class Create_Customer extends AppCompatActivity {
 
         spinner = (Spinner) findViewById(R.id.level);
 
-        spinnerfunction();
+         ArrayAdapter<String>arrayAdapter=new ArrayAdapter<String>(this,R.layout.support_simple_spinner_dropdown_item,arr);
+         spinner.setAdapter(arrayAdapter);
 
 
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -220,67 +221,6 @@ public class Create_Customer extends AppCompatActivity {
     }
 
 
-    private void spinnerfunction() {
-
-
-        getJSON("https://veiled-heat.000webhostapp.com/MLM/User/levelfetch.php");
-
-
-    }
-
-    private void getJSON(final String urlWebService) {
-
-        class GetJSON extends AsyncTask<Void, Void, String> {
-
-            @Override
-            protected void onPreExecute() {
-                super.onPreExecute();
-            }
-
-            @Override
-            protected String doInBackground(Void... voids) {
-                try {
-                    URL url = new URL(urlWebService);
-                    HttpURLConnection con = (HttpURLConnection) url.openConnection();
-                    StringBuilder sb = new StringBuilder();
-                    BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(con.getInputStream()));
-                    String json;
-                    while ((json = bufferedReader.readLine()) != null) {
-                        sb.append(json + "\n");
-                    }
-                    return sb.toString().trim();
-                } catch (Exception e) {
-                    return null;
-                }
-            }
-
-            @Override
-            protected void onPostExecute(String s) {
-                super.onPostExecute(s);
-                //Toast.makeText(getApplicationContext(), s, Toast.LENGTH_SHORT).show();
-                try {
-                    loadIntoListView(s);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-
-
-        }
-        GetJSON getJSON = new GetJSON();
-        getJSON.execute();
-    }
-
-    private void loadIntoListView(String json) throws JSONException {
-        JSONArray jsonArray = new JSONArray(json);
-        level = new String[jsonArray.length()];
-        for (int i = 0; i < jsonArray.length(); i++) {
-            JSONObject obj = jsonArray.getJSONObject(i);
-            level[i] = obj.getString("Level");
-        }
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, level);
-        spinner.setAdapter(arrayAdapter);
-    }
 
 
 

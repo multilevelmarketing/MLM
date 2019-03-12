@@ -70,17 +70,12 @@ public class customer_create_customer extends AppCompatActivity {
         profession = (EditText) findViewById(R.id.cus_user_profession);
         mobile = (EditText) findViewById(R.id.cus_user_mobile);
 
-        //foruser find the who is parent
-        pref = getSharedPreferences("userLogin", MODE_PRIVATE);
-        editor = pref.edit();
-        final String parent = pref.getString("username", null);
-
 
         //find the level of parent
         pref = getSharedPreferences("cusLogin", MODE_PRIVATE);
         editor = pref.edit();
         id = pref.getString("customerid", null);
-
+        final String parent=id;
         requestQueue = Volley.newRequestQueue(customer_create_customer.this);
         radioSexGroup = (RadioGroup) findViewById(R.id.cus_radiogrp);
         password = (EditText) findViewById(R.id.cus_user_password);
