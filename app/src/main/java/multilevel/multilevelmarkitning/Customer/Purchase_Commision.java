@@ -45,9 +45,14 @@ public class Purchase_Commision extends AppCompatActivity {
     String result;
     StringBuffer sb;
     Button btn;
+    String cat;
+    String name;
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
+    SharedPreferences preferences;
+    SharedPreferences.Editor e;
     RequestQueue requestQueue;
+    int c1=0,c2=0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,14 +69,38 @@ public class Purchase_Commision extends AppCompatActivity {
         editTextproid=(EditText)findViewById(R.id.cus_pur_pro_id);
         editTextcusid=(EditText)findViewById(R.id.cus_pur_id);
         sharedPreferences=getSharedPreferences("customerLogin",MODE_PRIVATE);
+        preferences=getSharedPreferences("productIdData",MODE_PRIVATE);
+        e=preferences.edit();
         editor=sharedPreferences.edit();
         editTextcusid.setText(sharedPreferences.getString("username",null));
         getJSONProductCategory("https://veiled-heat.000webhostapp.com/MLM/Customer/prod_cat.php");
+
+
         spinnerprocat.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
+            {
                 selectProductName(parent.getItemAtPosition(position).toString());
-                Toast.makeText(getApplicationContext(),parent.getItemAtPosition(position).toString(),Toast.LENGTH_LONG).show();
+                e.putString("productCat",parent.getSelectedItem().toString());
+//                cat=((TextView)view).getText().toString();
+//                c1=1;
+               // cat=parent.getItemAtPosition(position).toString();
+                //Toast.makeText(getApplicationContext(),cat,Toast.LENGTH_LONG).show();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent)
+            {
+
+            }
+        });
+        spinnerproname.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+//                name=((TextView)view).getText().toString();
+                e.putString("productName",parent.getSelectedItem().toString());
+//                c2=1;
+                //Toast.makeText(getApplicationContext(),name,Toast.LENGTH_LONG).show();
             }
 
             @Override
@@ -80,13 +109,54 @@ public class Purchase_Commision extends AppCompatActivity {
             }
         });
 
+        e.commit();
+        getProductId(preferences.getString("productCat",null),preferences.getString("productName",null));
+//        String s=cat+name;
+//        if(c1==1 && c2==1)
+//            Toast.makeText(Purchase_Commision.this,s,Toast.LENGTH_LONG).show();
+
+    }
+    void getProductId(String category,String name)
+    {
+        ProductId productId=new ProductId(category,name,new Response.Listener<String>(){
+            @Override
+
+            public void onResponse(String response) {
+                Log.i("Response", response);
+
+                try
+                {
+                    if (new JSONObject(response).get("success").equals("true"))
+                    {
+                        editTextproid.setText(new JSONObject(response).getString("pid"));
+                        Toast.makeText(getApplicationContext(),"success",Toast.LENGTH_LONG).show();
+                        //Toast.makeText(Admin_Login.this, "Account Successfully Created", Toast.LENGTH_SHORT).show();
+                        //finish();
+                    }
+                    else
+                    {
+                     //   progressDialog.dismiss();
+                        Toast.makeText(getApplicationContext(), "data not found ", Toast.LENGTH_SHORT).show();
+                    }
+                }
+                catch (JSONException e)
+                {
+                    e.printStackTrace();
+                }
+            }
+
+
+        });
+
+        requestQueue.add(productId);
+
+
 
 
 
 
 
     }
-
 
 
     private void getJSONProductCategory(final String urlWebService) {
@@ -118,7 +188,7 @@ public class Purchase_Commision extends AppCompatActivity {
             @Override
             protected void onPostExecute(String s) {
                 super.onPostExecute(s);
-                Toast.makeText(getApplicationContext(), s, Toast.LENGTH_SHORT).show();
+              //  Toast.makeText(getApplicationContext(), s, Toast.LENGTH_SHORT).show();
                 try {
                     loadIntoListView(s);
                 } catch (JSONException e) {
@@ -204,6 +274,29 @@ public class Purchase_Commision extends AppCompatActivity {
             super(Method.POST, REGISTER_URL, listener, null);
             parameters = new HashMap<>();
             parameters.put("product",Id);
+        }
+
+        @Override
+        protected Map<String, String> getParams() throws AuthFailureError
+        {
+            return parameters;
+        }
+    }
+
+
+
+
+
+    class ProductId extends StringRequest {
+
+        private static final String REGISTER_URL = "https://veiled-heat.000webhostapp.com/MLM/Customer/product_id.php";
+        private Map<String, String> parameters;
+
+        public ProductId(String pCategory,String pName,Response.Listener<String> listener) {
+            super(Method.POST, REGISTER_URL, listener, null);
+            parameters = new HashMap<>();
+            parameters.put("productCat",pCategory);
+            parameters.put("productName",pName);
         }
 
         @Override
