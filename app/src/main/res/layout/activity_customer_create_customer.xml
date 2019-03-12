@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Customer.customer_create_customer"
+    android:orientation="vertical"
+    android:background="@drawable/imag_">
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="60dp"
+                android:layout_marginTop="40dp"
+                android:text="Create Customer"
+                android:textColor="#ffff"
+                android:textSize="40dp" />
+
+            <EditText
+                android:id="@+id/cus_user_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:background="@drawable/customedittext"
+                android:hint="Name"
+                android:textColorHint="#fff" />
+
+
+            <EditText
+                android:id="@+id/cus_user_address"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:background="@drawable/customedittext"
+                android:hint="Location"
+                android:textColorHint="#fff" />
+
+            <EditText
+                android:id="@+id/cus_user_profession"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:background="@drawable/customedittext"
+                android:hint="Profession"
+                android:textColorHint="#fff" />
+
+            <EditText
+                android:id="@+id/cus_user_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:background="@drawable/customedittext"
+                android:hint="Email"
+                android:inputType="textEmailAddress"
+                android:textColorHint="#fff" />
+
+            <EditText
+                android:id="@+id/cus_user_mobile"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:background="@drawable/customedittext"
+                android:hint="Phone Number"
+                android:inputType="number"
+                android:textColorHint="#fff" />
+
+            <RadioGroup
+                android:id="@+id/cus_radiogrp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/cus_male"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Male"
+                    android:textColor="#fff" />
+
+                <RadioButton
+                    android:id="@+id/cus_female"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="Female"
+                    android:textColor="#fff" />
+
+            </RadioGroup>
+
+
+            <TextView
+                android:id="@+id/cus_user_login"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:text="Level"
+                android:textColor="#fff"
+                android:textSize="20dp" />
+
+            <Spinner
+                android:id="@+id/level"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@color/md_light_blue_A100">
+
+            </Spinner>
+
+            <EditText
+                android:id="@+id/cus_user_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:background="@drawable/customedittext"
+                android:hint="Enter password"
+                android:inputType="textPassword"
+                android:textColorHint="#fff" />
+
+            <Button
+                android:id="@+id/create_cus_btn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:text="Submit" />
+
+
+        </LinearLayout>
+
+
+    </ScrollView>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</LinearLayout>

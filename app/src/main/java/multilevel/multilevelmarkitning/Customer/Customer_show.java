@@ -52,7 +52,6 @@ public class Customer_show extends AppCompatActivity {
 
         pref=getSharedPreferences("cusLogin",MODE_PRIVATE);
         editor=pref.edit();
-
         id=pref.getString("customerid",null);
         tvid.setText(pref.getString("customerid",null));
 

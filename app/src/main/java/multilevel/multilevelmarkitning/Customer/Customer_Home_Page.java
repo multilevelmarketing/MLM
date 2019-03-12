@@ -62,7 +62,7 @@ public class Customer_Home_Page extends AppCompatActivity {
            @Override
            public void onClick(View v) {
 
-               startActivity(new Intent(Customer_Home_Page.this, Create_Customer.class));
+               startActivity(new Intent(Customer_Home_Page.this, customer_create_customer.class));
 
            }
        });

@@ -11,18 +11,21 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".User.User_ShowCustomer"
-            android:parentActivityName=".User.User_Show"/>
+        <activity android:name=".Customer.customer_create_customer"></activity>
+        <activity
+            android:name=".User.User_ShowCustomer"
+            android:parentActivityName=".User.User_Show" />
         <activity
             android:name=".Customer.Customer_show"
-            android:parentActivityName=".Customer.Customer_Home_Page"></activity>
+            android:parentActivityName=".Customer.Customer_Home_Page" />
         <activity android:name=".Customer.Customer_update" />
         <activity android:name=".Admin.Admin_Update" />
         <activity android:name=".Admin.User_Show" />
         <activity android:name=".Admin.Admin_Profile" />
         <activity android:name=".Admin.Admin_Panel" />
-        <activity android:name=".Admin.Admin_Login"
-            android:parentActivityName=".MainActivity"/>
+        <activity
+            android:name=".Admin.Admin_Login"
+            android:parentActivityName=".MainActivity" />
         <activity android:name=".Customer.Customer_Home_Page" />
         <activity
             android:name=".Customer.Purchase_Commision"
@@ -31,8 +34,9 @@
             android:name=".User.User_Show"
             android:label="@string/title_activity_user__show"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".Customer.Customer_Login"
-            android:parentActivityName=".MainActivity"/>
+        <activity
+            android:name=".Customer.Customer_Login"
+            android:parentActivityName=".MainActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -41,12 +45,11 @@
             </intent-filter>
         </activity>
         <activity android:name=".Admin.Admin_Register" />
-        <activity android:name=".User.User_Login"
-            android:parentActivityName=".MainActivity"/>
+        <activity
+            android:name=".User.User_Login"
+            android:parentActivityName=".MainActivity" />
         <activity android:name=".User.User_Register" />
         <activity android:name=".User.Create_Customer" />
-
-
     </application>
 
 </manifest>

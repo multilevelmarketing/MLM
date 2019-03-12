@@ -1,14 +1,15 @@
-package multilevel.multilevelmarkitning.User;
+package multilevel.multilevelmarkitning.Customer;
 
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Build;
-import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -39,15 +40,16 @@ import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 
-import multilevel.multilevelmarkitning.Customer.Customer_Login;
 import multilevel.multilevelmarkitning.IdGenerator;
 import multilevel.multilevelmarkitning.R;
+import multilevel.multilevelmarkitning.User.Create_Customer;
 import multilevel.multilevelmarkitning.Validation;
 
-public class Create_Customer extends AppCompatActivity {
+public class customer_create_customer extends AppCompatActivity {
+
     Spinner spinner;
     String[] level;
-    EditText name,location,profession,mobile,password,email;
+    EditText name, location, profession, mobile, password, email;
     Button createbtn;
     private RadioGroup radioSexGroup;
     private RadioButton radioSexButton;
@@ -55,25 +57,31 @@ public class Create_Customer extends AppCompatActivity {
     String Level;
     AlertDialog.Builder builder;
     SharedPreferences pref;
+    String id;
     SharedPreferences.Editor editor;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_create__customer);
+        setContentView(R.layout.activity_customer_create_customer);
         name = (EditText) findViewById(R.id.cus_user_name);
         builder = new AlertDialog.Builder(this);
         location = (EditText) findViewById(R.id.cus_user_address);
         profession = (EditText) findViewById(R.id.cus_user_profession);
         mobile = (EditText) findViewById(R.id.cus_user_mobile);
 
+        //foruser find the who is parent
+        pref = getSharedPreferences("userLogin", MODE_PRIVATE);
+        editor = pref.edit();
+        final String parent = pref.getString("username", null);
 
-        pref=getSharedPreferences("userLogin",MODE_PRIVATE);
-        editor=pref.edit();
 
-        final String parent=pref.getString("username",null);
+        //find the level of parent
+        pref = getSharedPreferences("cusLogin", MODE_PRIVATE);
+        editor = pref.edit();
+        id = pref.getString("customerid", null);
 
+        requestQueue = Volley.newRequestQueue(customer_create_customer.this);
         radioSexGroup = (RadioGroup) findViewById(R.id.cus_radiogrp);
         password = (EditText) findViewById(R.id.cus_user_password);
         email = (EditText) findViewById(R.id.cus_user_email);
@@ -88,8 +96,7 @@ public class Create_Customer extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
-                Level=((TextView)view).getText().toString();
-
+                Level = ((TextView) view).getText().toString();
 
 
             }
@@ -101,12 +108,7 @@ public class Create_Customer extends AppCompatActivity {
         });
 
 
-
-
-
-
-
-        requestQueue = Volley.newRequestQueue(Create_Customer.this);
+        requestQueue = Volley.newRequestQueue(customer_create_customer.this);
 
 
         createbtn.setOnClickListener(new View.OnClickListener() {
@@ -123,8 +125,7 @@ public class Create_Customer extends AppCompatActivity {
 
                 if (TextUtils.isEmpty(Name) || TextUtils.isEmpty(Location) || TextUtils.isEmpty(Profession) || TextUtils.isEmpty(Mobile) || TextUtils.isEmpty(Password) || TextUtils.isEmpty(Email)) {
                     Toast.makeText(getApplicationContext(), "please fill all  the fields", Toast.LENGTH_SHORT).show();
-                }
-                else {
+                } else {
                     if (Password.length() < 6) {
 
                         password.setError("password must be atleast 6 characters");
@@ -135,8 +136,7 @@ public class Create_Customer extends AppCompatActivity {
                         mobile.setError("please enter a valid mobile number");
                     } else if (radioSexGroup.getCheckedRadioButtonId() == -1) {
                         Toast.makeText(getApplicationContext(), "Please select your gender", Toast.LENGTH_SHORT).show();
-                    } else
-                        {
+                    } else {
                         int selectedId = radioSexGroup.getCheckedRadioButtonId();
                         radioSexButton = (RadioButton) findViewById(selectedId);
                         String sex = radioSexButton.getText().toString().trim();
@@ -144,7 +144,7 @@ public class Create_Customer extends AppCompatActivity {
                         final String idgenerated = IdGenerator.generateId(Name);
 
 
-                        CustomerRegister registerRequest = new CustomerRegister(idgenerated, Name, Mobile, Email, Password, Profession, Level, sex, Location,parent, new Response.Listener<String>() {
+                        CustomerRegister registerRequest = new CustomerRegister(idgenerated, Name, Mobile, Email, Password, Profession, Level, sex, Location, parent, new Response.Listener<String>() {
                             @Override
                             public void onResponse(String response) {
                                 Log.i("Response", response);
@@ -152,7 +152,7 @@ public class Create_Customer extends AppCompatActivity {
                                 try {
                                     if (new JSONObject(response).getString("status").equals(("true"))) {
 
-                                          Toast.makeText(Create_Customer.this, "Account Successfully Created", Toast.LENGTH_LONG).show();
+                                        Toast.makeText(customer_create_customer.this, "Account Successfully Created", Toast.LENGTH_LONG).show();
 
                                         builder.setMessage("Your ID is " + idgenerated);
                                         builder.setCancelable(true);
@@ -171,9 +171,8 @@ public class Create_Customer extends AppCompatActivity {
                                         alertDialog.show();
 
 
-
                                     } else
-                                        Toast.makeText(Create_Customer.this, "Something Has Happened. Please Try Again!", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(customer_create_customer.this, "Something Has Happened. Please Try Again!", Toast.LENGTH_SHORT).show();
                                 } catch (JSONException e) {
                                     e.printStackTrace();
                                 }
@@ -196,7 +195,7 @@ public class Create_Customer extends AppCompatActivity {
         private static final String REGISTER_URL = "https://veiled-heat.000webhostapp.com/MLM/Customer/customer_reg.php";
         private Map<String, String> parameters;
 
-        public CustomerRegister(String id,String name, String mobile, String email, String password,String professsion,String level,String gender,String location,String Parent, Response.Listener<String> listener) {
+        public CustomerRegister(String id, String name, String mobile, String email, String password, String professsion, String level, String gender, String location, String Parent, Response.Listener<String> listener) {
             super(Method.POST, REGISTER_URL, listener, null);
             parameters = new HashMap<>();
             parameters.put("name", name);
@@ -208,8 +207,88 @@ public class Create_Customer extends AppCompatActivity {
             parameters.put("level", level);
             parameters.put("gender", gender);
             parameters.put("location", location);
-            parameters.put("parent",Parent);
+            parameters.put("parent", Parent);
 
+        }
+
+        @Override
+        protected Map<String, String> getParams() throws AuthFailureError {
+            return parameters;
+        }
+    }
+
+
+    private void spinnerfunction()
+    {
+
+        pref = getSharedPreferences("cusLogin", MODE_PRIVATE);
+
+
+        String id=pref.getString("customerid", null);
+
+        CustomerId customerId=new CustomerId(id,new Response.Listener<String>(){
+            @Override
+
+            public void onResponse(String response) {
+                Log.i("Response", response);
+                // Toast.makeText(getApplicationContext(),response,Toast.LENGTH_LONG).show();
+                try
+                {
+                    JSONArray jsonArray=new JSONArray(response);
+                    JSONObject jsonObject=null;
+                    String[] heroes = new String[jsonArray.length()];
+                    for(int i=0;i<jsonArray.length();i++)
+                    {
+                        jsonObject=jsonArray.getJSONObject(i);
+                        heroes[i] = jsonObject.getString("Level");
+
+                    }
+                    ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(customer_create_customer.this, android.R.layout.simple_list_item_1, heroes);
+                    spinner.setAdapter(arrayAdapter);
+                }
+                catch (Exception e)
+                {
+                    e.printStackTrace();
+                }
+
+
+//                try
+//                {
+//                   Toast.makeText(getApplicationContext(),response,Toast.LENGTH_SHORT).show();
+//
+//                }
+//                catch (JSONException e)
+//                {
+//                    e.printStackTrace();
+//                }
+            }
+
+
+        });
+
+        requestQueue.add(customerId);
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+    public class CustomerId extends StringRequest {
+
+        private static final String REGISTER_URL = "https://veiled-heat.000webhostapp.com/MLM/Customer/customer_level.php";
+        private Map<String, String> parameters;
+
+        public CustomerId(String Id,Response.Listener<String> listener) {
+            super(Method.POST, REGISTER_URL, listener, null);
+            parameters = new HashMap<>();
+            parameters.put("id",Id);
         }
 
         @Override
@@ -218,88 +297,6 @@ public class Create_Customer extends AppCompatActivity {
             return parameters;
         }
     }
-
-
-    private void spinnerfunction() {
-
-
-        getJSON("https://veiled-heat.000webhostapp.com/MLM/User/levelfetch.php");
-
-
-    }
-
-    private void getJSON(final String urlWebService) {
-
-        class GetJSON extends AsyncTask<Void, Void, String> {
-
-            @Override
-            protected void onPreExecute() {
-                super.onPreExecute();
-            }
-
-            @Override
-            protected String doInBackground(Void... voids) {
-                try {
-                    URL url = new URL(urlWebService);
-                    HttpURLConnection con = (HttpURLConnection) url.openConnection();
-                    StringBuilder sb = new StringBuilder();
-                    BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(con.getInputStream()));
-                    String json;
-                    while ((json = bufferedReader.readLine()) != null) {
-                        sb.append(json + "\n");
-                    }
-                    return sb.toString().trim();
-                } catch (Exception e) {
-                    return null;
-                }
-            }
-
-            @Override
-            protected void onPostExecute(String s) {
-                super.onPostExecute(s);
-                //Toast.makeText(getApplicationContext(), s, Toast.LENGTH_SHORT).show();
-                try {
-                    loadIntoListView(s);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-
-
-        }
-        GetJSON getJSON = new GetJSON();
-        getJSON.execute();
-    }
-
-    private void loadIntoListView(String json) throws JSONException {
-        JSONArray jsonArray = new JSONArray(json);
-        level = new String[jsonArray.length()];
-        for (int i = 0; i < jsonArray.length(); i++) {
-            JSONObject obj = jsonArray.getJSONObject(i);
-            level[i] = obj.getString("Level");
-        }
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, level);
-        spinner.setAdapter(arrayAdapter);
-    }
-
-
-
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
