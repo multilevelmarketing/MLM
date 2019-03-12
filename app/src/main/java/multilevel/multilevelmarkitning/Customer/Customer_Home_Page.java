@@ -1,7 +1,6 @@
 package multilevel.multilevelmarkitning.Customer;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
@@ -29,10 +28,11 @@ public class Customer_Home_Page extends AppCompatActivity {
         int id=item.getItemId();
         if(id==R.id.customer_logout)
         {
-            SharedPreferences loginPreferences=getSharedPreferences("customerLogin",MODE_PRIVATE);
-            SharedPreferences.Editor loginPrefsEditor=loginPreferences.edit();
-            loginPrefsEditor.clear();
-            loginPrefsEditor.commit();
+//            SharedPreferences loginPreferences=getSharedPreferences("customerLogin",MODE_PRIVATE);
+//            SharedPreferences.Editor loginPrefsEditor=loginPreferences.edit();
+//            loginPrefsEditor.clear();
+//            loginPrefsEditor.commit();
+            finish();
             startActivity(new Intent(Customer_Home_Page.this,Customer_Login.class));
         }
         return super.onOptionsItemSelected(item);

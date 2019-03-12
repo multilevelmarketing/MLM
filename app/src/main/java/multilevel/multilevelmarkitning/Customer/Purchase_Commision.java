@@ -5,11 +5,20 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
+
+import com.android.volley.AuthFailureError;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -20,6 +29,8 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.HashMap;
+import java.util.Map;
 
 import multilevel.multilevelmarkitning.R;
 
@@ -36,6 +47,7 @@ public class Purchase_Commision extends AppCompatActivity {
     Button btn;
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
+    RequestQueue requestQueue;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,6 +56,7 @@ public class Purchase_Commision extends AppCompatActivity {
         actionBar.setTitle("Purchase and commission");
         actionBar.setDisplayHomeAsUpEnabled(true);
         spinnerprocat=(Spinner)findViewById(R.id.cus_pur_pro_type);
+        requestQueue = Volley.newRequestQueue(Purchase_Commision.this);
         spinnerproname=(Spinner)findViewById(R.id.cus_pur_pro_name);
         editTextcomamt=(EditText)findViewById(R.id.cus_pur_commission_amt);
         editTextcompercent=(EditText)findViewById(R.id.cus_pur_commission);
@@ -54,8 +67,18 @@ public class Purchase_Commision extends AppCompatActivity {
         editor=sharedPreferences.edit();
         editTextcusid.setText(sharedPreferences.getString("username",null));
         getJSONProductCategory("https://veiled-heat.000webhostapp.com/MLM/Customer/prod_cat.php");
+        spinnerprocat.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                selectProductName(parent.getItemAtPosition(position).toString());
+                Toast.makeText(getApplicationContext(),parent.getItemAtPosition(position).toString(),Toast.LENGTH_LONG).show();
+            }
 
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
 
+            }
+        });
 
 
 
@@ -63,7 +86,6 @@ public class Purchase_Commision extends AppCompatActivity {
 
 
     }
-
 
 
 
@@ -116,9 +138,79 @@ public class Purchase_Commision extends AppCompatActivity {
         for (int i = 0; i < jsonArray.length(); i++) {
             JSONObject obj = jsonArray.getJSONObject(i);
             heroes[i] = obj.getString("Type");
-            System.out.println();
+        //    System.out.println();
         }
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, heroes);
         spinnerprocat.setAdapter(arrayAdapter);
     }
+
+    public void selectProductName(String product)
+    {
+
+        ProductList productList=new ProductList(product,new Response.Listener<String>(){
+            @Override
+
+            public void onResponse(String response) {
+                Log.i("Response", response);
+               // Toast.makeText(getApplicationContext(),response,Toast.LENGTH_LONG).show();
+                try
+                {
+                    JSONArray jsonArray=new JSONArray(response);
+                    JSONObject jsonObject=null;
+                    String[] heroes = new String[jsonArray.length()];
+                    for(int i=0;i<jsonArray.length();i++)
+                    {
+                        jsonObject=jsonArray.getJSONObject(i);
+                        heroes[i] = jsonObject.getString("name");
+
+                    }
+                    ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(Purchase_Commision.this, android.R.layout.simple_list_item_1, heroes);
+                    spinnerproname.setAdapter(arrayAdapter);
+                }
+                catch (Exception e)
+                {
+                    e.printStackTrace();
+                }
+
+
+//                try
+//                {
+//                   Toast.makeText(getApplicationContext(),response,Toast.LENGTH_SHORT).show();
+//
+//                }
+//                catch (JSONException e)
+//                {
+//                    e.printStackTrace();
+//                }
+            }
+
+
+        });
+
+        requestQueue.add(productList);
+
+
+
+
+    }
+
+
+    public class ProductList extends StringRequest {
+
+        private static final String REGISTER_URL = "https://veiled-heat.000webhostapp.com/MLM/Customer/product_name.php";
+        private Map<String, String> parameters;
+
+        public ProductList(String Id,Response.Listener<String> listener) {
+            super(Method.POST, REGISTER_URL, listener, null);
+            parameters = new HashMap<>();
+            parameters.put("product",Id);
+        }
+
+        @Override
+        protected Map<String, String> getParams() throws AuthFailureError
+        {
+            return parameters;
+        }
+    }
+
 }
