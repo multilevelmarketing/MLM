@@ -63,8 +63,8 @@ public class Admin_Register extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-               final  String User_Name=user_name.getText().toString().trim();
-               final String idgenerated = IdGenerator.generateId(User_Name);
+                final  String User_Name=user_name.getText().toString().trim();
+                final String idgenerated = IdGenerator.generateId(User_Name);
                 String Company=company.getText().toString().trim();
                 String Email=email.getText().toString().trim();
                 String Password=password.getText().toString().trim();
