@@ -55,6 +55,7 @@ public class Admin_Login extends AppCompatActivity {
         signup=(TextView)findViewById(R.id.admin_sigup);
         checkBox=(CheckBox)findViewById(R.id.admin_checkBox);
         progressDialog=new ProgressDialog(this);
+
         loginPreferences=getSharedPreferences("adminLogin",MODE_PRIVATE);
         loginPrefsEditor=loginPreferences.edit();
         intent=getIntent();
