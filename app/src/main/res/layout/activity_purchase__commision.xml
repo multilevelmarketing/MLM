@@ -83,14 +83,7 @@
 
 
 
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/customedittext"
-        android:layout_margin="10dp"
-        android:hint="Commission Amount"
-        android:id="@+id/cus_pur_commission_amt"
-        android:textColorHint="#fff"/>
+
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
