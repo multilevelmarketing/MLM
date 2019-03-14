@@ -12,7 +12,6 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.RequestQueue;
@@ -45,16 +44,16 @@ public class Purchase_Commision extends AppCompatActivity {
     String result;
     StringBuffer sb;
     Button btn;
-    String cat;
-    String name;
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
     SharedPreferences preferences;
     SharedPreferences.Editor e;
     RequestQueue requestQueue;
     int c1=0,c2=0;
+    String category;
+    String productname;
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)  {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_purchase__commision);
         actionBar=getSupportActionBar();
@@ -69,38 +68,21 @@ public class Purchase_Commision extends AppCompatActivity {
         editTextproid=(EditText)findViewById(R.id.cus_pur_pro_id);
         editTextcusid=(EditText)findViewById(R.id.cus_pur_id);
         sharedPreferences=getSharedPreferences("customerLogin",MODE_PRIVATE);
-        preferences=getSharedPreferences("productIdData",MODE_PRIVATE);
-        e=preferences.edit();
+//        preferences=getSharedPreferences("productIdData",MODE_PRIVATE);
+//        e=preferences.edit();
         editor=sharedPreferences.edit();
         editTextcusid.setText(sharedPreferences.getString("username",null));
+        editTextcusid.setEnabled(false);
         getJSONProductCategory("https://veiled-heat.000webhostapp.com/MLM/Customer/prod_cat.php");
-
+      //  final String category=spinnerprocat.getSelectedItem().toString();
 
         spinnerprocat.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
-            {
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id)  {
+
                 selectProductName(parent.getItemAtPosition(position).toString());
-                e.putString("productCat",parent.getSelectedItem().toString());
-//                cat=((TextView)view).getText().toString();
-//                c1=1;
-               // cat=parent.getItemAtPosition(position).toString();
-                //Toast.makeText(getApplicationContext(),cat,Toast.LENGTH_LONG).show();
-            }
 
-            @Override
-            public void onNothingSelected(AdapterView<?> parent)
-            {
 
-            }
-        });
-        spinnerproname.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-//                name=((TextView)view).getText().toString();
-                e.putString("productName",parent.getSelectedItem().toString());
-//                c2=1;
-                //Toast.makeText(getApplicationContext(),name,Toast.LENGTH_LONG).show();
             }
 
             @Override
@@ -108,14 +90,36 @@ public class Purchase_Commision extends AppCompatActivity {
 
             }
         });
+        spinnerproname.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if(spinnerproname.getSelectedItem()!=null && spinnerprocat.getSelectedItem()!=null)
+                {
+                    category=spinnerprocat.getSelectedItem().toString();
+                    productname=spinnerproname.getSelectedItem().toString();
+                    getProductId(category,productname);
+              //      Toast.makeText(getApplicationContext(),"Category"+category+" Name "+productname,Toast.LENGTH_LONG).show();
 
-        e.commit();
-        getProductId(preferences.getString("productCat",null),preferences.getString("productName",null));
-//        String s=cat+name;
-//        if(c1==1 && c2==1)
-//            Toast.makeText(Purchase_Commision.this,s,Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+        editTextproid.setEnabled(false);
+        editTextproductcost.setEnabled(false);
+
+
+
+
+
+
+
 
     }
+
     void getProductId(String category,String name)
     {
         ProductId productId=new ProductId(category,name,new Response.Listener<String>(){
@@ -129,14 +133,9 @@ public class Purchase_Commision extends AppCompatActivity {
                     if (new JSONObject(response).get("success").equals("true"))
                     {
                         editTextproid.setText(new JSONObject(response).getString("pid"));
-                        Toast.makeText(getApplicationContext(),"success",Toast.LENGTH_LONG).show();
-                        //Toast.makeText(Admin_Login.this, "Account Successfully Created", Toast.LENGTH_SHORT).show();
-                        //finish();
-                    }
-                    else
-                    {
-                     //   progressDialog.dismiss();
-                        Toast.makeText(getApplicationContext(), "data not found ", Toast.LENGTH_SHORT).show();
+                        editTextproductcost.setText(new JSONObject(response).getString("pcost"));
+                     //   Toast.makeText(getApplicationContext(),"success",Toast.LENGTH_LONG).show();
+
                     }
                 }
                 catch (JSONException e)
@@ -188,7 +187,6 @@ public class Purchase_Commision extends AppCompatActivity {
             @Override
             protected void onPostExecute(String s) {
                 super.onPostExecute(s);
-              //  Toast.makeText(getApplicationContext(), s, Toast.LENGTH_SHORT).show();
                 try {
                     loadIntoListView(s);
                 } catch (JSONException e) {
@@ -208,7 +206,6 @@ public class Purchase_Commision extends AppCompatActivity {
         for (int i = 0; i < jsonArray.length(); i++) {
             JSONObject obj = jsonArray.getJSONObject(i);
             heroes[i] = obj.getString("Type");
-        //    System.out.println();
         }
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, heroes);
         spinnerprocat.setAdapter(arrayAdapter);
@@ -222,7 +219,6 @@ public class Purchase_Commision extends AppCompatActivity {
 
             public void onResponse(String response) {
                 Log.i("Response", response);
-               // Toast.makeText(getApplicationContext(),response,Toast.LENGTH_LONG).show();
                 try
                 {
                     JSONArray jsonArray=new JSONArray(response);
@@ -242,16 +238,6 @@ public class Purchase_Commision extends AppCompatActivity {
                     e.printStackTrace();
                 }
 
-
-//                try
-//                {
-//                   Toast.makeText(getApplicationContext(),response,Toast.LENGTH_SHORT).show();
-//
-//                }
-//                catch (JSONException e)
-//                {
-//                    e.printStackTrace();
-//                }
             }
 
 
