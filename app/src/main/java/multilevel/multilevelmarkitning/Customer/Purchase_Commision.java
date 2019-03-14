@@ -1,5 +1,6 @@
 package multilevel.multilevelmarkitning.Customer;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -12,6 +13,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.RequestQueue;
@@ -37,7 +39,7 @@ public class Purchase_Commision extends AppCompatActivity {
 
     ActionBar actionBar;
     Spinner spinnerprocat,spinnerproname;
-    EditText editTextcusid,editTextproid,editTextproductcost,editTextcompercent,editTextcomamt;
+    EditText editTextcusid,editTextproid,editTextproductcost,editTextcompercent;
     String[] title;
     InputStream in;
     String line;
@@ -62,16 +64,16 @@ public class Purchase_Commision extends AppCompatActivity {
         spinnerprocat=(Spinner)findViewById(R.id.cus_pur_pro_type);
         requestQueue = Volley.newRequestQueue(Purchase_Commision.this);
         spinnerproname=(Spinner)findViewById(R.id.cus_pur_pro_name);
-        editTextcomamt=(EditText)findViewById(R.id.cus_pur_commission_amt);
         editTextcompercent=(EditText)findViewById(R.id.cus_pur_commission);
         editTextproductcost=(EditText)findViewById(R.id.cus_pur_pro_cost);
         editTextproid=(EditText)findViewById(R.id.cus_pur_pro_id);
         editTextcusid=(EditText)findViewById(R.id.cus_pur_id);
-        sharedPreferences=getSharedPreferences("customerLogin",MODE_PRIVATE);
+        btn=(Button)findViewById(R.id.cus_pur_btn);
+        sharedPreferences=getSharedPreferences("cusLogin",MODE_PRIVATE);
 //        preferences=getSharedPreferences("productIdData",MODE_PRIVATE);
 //        e=preferences.edit();
         editor=sharedPreferences.edit();
-        editTextcusid.setText(sharedPreferences.getString("username",null));
+        editTextcusid.setText(sharedPreferences.getString("customerid",null));
         editTextcusid.setEnabled(false);
         getJSONProductCategory("https://veiled-heat.000webhostapp.com/MLM/Customer/prod_cat.php");
       //  final String category=spinnerprocat.getSelectedItem().toString();
@@ -110,13 +112,83 @@ public class Purchase_Commision extends AppCompatActivity {
         });
         editTextproid.setEnabled(false);
         editTextproductcost.setEnabled(false);
+        getCommissionPercent(sharedPreferences.getString("customerid",null));
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String cusid=editTextcusid.getText().toString();
+                String proid=editTextproid.getText().toString();
+                String price=editTextproductcost.getText().toString();
+                String com=editTextcompercent.getText().toString();
+                onButtonClick(cusid, proid,price,com);
+            }
+        });
+
+    }
+
+    void onButtonClick(String cusid,String proid,String price,String comission)
+    {
+        ComissionSet comissionSet=new ComissionSet(cusid,proid,price,comission,new Response.Listener<String>(){
+            @Override
+            public void onResponse(String response) {
+                Log.i("Response", response);
+
+                try
+                {
+                    if (new JSONObject(response).get("success").equals("true"))
+                    {
+                       // finish();
+                        Toast.makeText(getApplicationContext(),"Comission transfer",Toast.LENGTH_LONG).show();
+                        startActivity(new Intent(getApplicationContext(),Customer_Home_Page.class));
+                    }
+                    else
+                    {
+                        Toast.makeText(getApplicationContext(), "some error occur ", Toast.LENGTH_SHORT).show();
+                    }
+                }
+                catch (JSONException e)
+                {
+                    e.printStackTrace();
+                }
+            }
 
 
+        });
+
+        requestQueue.add(comissionSet);
+
+    }
+    void getCommissionPercent(String id)
+    {
+        ComissionPercent comissionPercent=new ComissionPercent(id,new Response.Listener<String>(){
+            @Override
+
+            public void onResponse(String response) {
+                Log.i("Response", response);
+
+                try
+                {
+                    if (new JSONObject(response).get("success").equals("true"))
+                    {
+
+                        editTextcompercent.setText(new JSONObject(response).getString("percent"));
+                        editTextcompercent.setEnabled(false);
+                    }
+                    else
+                    {
+                        Toast.makeText(getApplicationContext(), "some error in percent ", Toast.LENGTH_SHORT).show();
+                    }
+                }
+                catch (JSONException e)
+                {
+                    e.printStackTrace();
+                }
+            }
 
 
+        });
 
-
-
+        requestQueue.add(comissionPercent);
 
     }
 
