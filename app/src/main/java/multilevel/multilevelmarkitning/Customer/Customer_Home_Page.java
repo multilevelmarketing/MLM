@@ -15,7 +15,7 @@ import multilevel.multilevelmarkitning.User.Create_Customer;
 
 public class Customer_Home_Page extends AppCompatActivity {
 
-     TextView Customer_Commesion,Customer_Create,Customer_Profile;
+     TextView Customer_Commesion,Customer_Create,Customer_Profile,Customer_Amount;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -46,6 +46,7 @@ public class Customer_Home_Page extends AppCompatActivity {
         Customer_Commesion=(TextView)findViewById(R.id.Customer_comission);
         Customer_Create=(TextView)findViewById(R.id.Customer_create);
         Customer_Profile=(TextView)findViewById(R.id.cus_profile);
+        Customer_Amount=(TextView)findViewById(R.id.customer_amt);
 
 
 
@@ -73,6 +74,12 @@ public class Customer_Home_Page extends AppCompatActivity {
            public void onClick(View v) {
                Intent intent=new Intent(getApplicationContext(),Customer_show.class);
                startActivity(new Intent(intent));
+           }
+       });
+       Customer_Amount.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View v) {
+               startActivity(new Intent(getApplicationContext(),CustomerAmountPage.class));
            }
        });
 

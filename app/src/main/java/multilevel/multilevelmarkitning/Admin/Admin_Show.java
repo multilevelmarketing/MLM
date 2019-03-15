@@ -111,7 +111,6 @@ public class Admin_Show extends Fragment {
 
 
 
-   @Nullable
    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
         // Inflate the layout for this fragment
