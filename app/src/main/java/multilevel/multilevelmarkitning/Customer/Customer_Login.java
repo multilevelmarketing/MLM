@@ -86,6 +86,7 @@ public class Customer_Login extends AppCompatActivity {
         loginbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 String UserID=userid.getText().toString().trim();
                 String Password=password.getText().toString().trim();
                 editor.putString("customerid",UserID);

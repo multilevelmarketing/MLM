@@ -14,8 +14,10 @@
         <activity
             android:name=".Customer.CustomerAmountPage"
             android:label="@string/title_activity_customer_amount_page"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
-        <activity android:name=".Customer.customer_create_customer" />
+            android:theme="@style/AppTheme.NoActionBar"
+            android:parentActivityName=".Customer.Customer_Home_Page"/>
+        <activity android:name=".Customer.customer_create_customer"
+            android:parentActivityName=".Customer.Customer_Home_Page"/>
         <activity
             android:name=".User.User_ShowCustomer"
             android:parentActivityName=".User.User_Show" />
@@ -53,7 +55,8 @@
             android:name=".User.User_Login"
             android:parentActivityName=".MainActivity" />
         <activity android:name=".User.User_Register" />
-        <activity android:name=".User.Create_Customer" />
+        <activity android:name=".User.Create_Customer"
+            android:parentActivityName=".User.User_Show"/>
     </application>
 
 </manifest>

@@ -130,10 +130,6 @@ public class PerDayAmount extends Fragment {
         requestQueue.add(comissionGet);
 
 
-
-
-
-
         return rootView;
     }
 
