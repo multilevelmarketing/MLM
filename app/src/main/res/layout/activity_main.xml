@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity"
+    android:background="#1d1d1e"
     android:orientation="vertical">
 
     <Button
@@ -12,6 +13,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Admin"
+        android:background="@drawable/round_button"
+        android:textColor="#f4f5f7"
         android:layout_marginTop="150dp"/>
 
     <Button
@@ -19,6 +22,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="User"
+        android:background="@drawable/round_button"
+        android:textColor="#f4f5f7"
         android:layout_marginTop="20dp"
         />
     <Button
@@ -26,6 +31,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Customer"
+        android:background="@drawable/round_button"
+        android:textColor="#f4f5f7"
         android:layout_marginTop="20dp"/>
 
 
