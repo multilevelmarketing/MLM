@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 import multilevel.multilevelmarkitning.Admin.Admin_Login;
 import multilevel.multilevelmarkitning.Admin.Admin_Register;
@@ -13,10 +14,36 @@ import multilevel.multilevelmarkitning.User.User_Register;
 
 public class MainActivity extends AppCompatActivity {
 
+    private long backPressedTime;
+    Toast backToast;
+
+    @Override
+    public void onBackPressed() {
+
+        if(backPressedTime+2000>System.currentTimeMillis())
+        {
+
+            backToast.cancel();
+            super.onBackPressed();
+            //finish();
+            return;
+
+        }
+
+        else
+        {
+
+            backToast=Toast.makeText(getApplicationContext(),"Please back to exit",Toast.LENGTH_SHORT);
+            backToast.show();
+        }
+        backPressedTime=System.currentTimeMillis();
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
 
     }
 

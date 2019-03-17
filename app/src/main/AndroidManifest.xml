@@ -16,6 +16,7 @@
             android:label="@string/title_activity_customer_amount_page"
             android:theme="@style/AppTheme.NoActionBar"
             android:parentActivityName=".Customer.Customer_Home_Page"/>
+
         <activity
             android:name=".Customer.customer_create_customer"
             android:parentActivityName=".Customer.Customer_Home_Page"/>
@@ -24,10 +25,12 @@
             android:parentActivityName=".User.User_Show" />
         <activity
             android:name=".Customer.Customer_show"
-            android:parentActivityName=".Customer.Customer_Home_Page" />
-        <activity android:name=".Customer.Customer_update" />
+            android:parentActivityName=".Customer.Customer_Home_Page"/>
+        <activity android:name=".Customer.Customer_update"
+            android:parentActivityName=".Customer.Customer_Home_Page"/>
         <activity android:name=".Admin.Admin_Update"/>
-        <activity android:name=".Admin.Admin_Profile" />
+        <activity android:name=".Admin.Admin_Profile"
+            />
         <activity android:name=".Admin.Admin_Panel" />
         <activity
             android:name=".Admin.Admin_Login"
@@ -43,7 +46,8 @@
         <activity
             android:name=".Customer.Customer_Login"
             android:parentActivityName=".MainActivity" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".MainActivity"
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
