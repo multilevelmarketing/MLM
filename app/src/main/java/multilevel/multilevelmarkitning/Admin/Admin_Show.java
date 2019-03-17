@@ -81,11 +81,11 @@ public class Admin_Show extends Fragment {
                     jsonObject = jsonArray.getJSONObject(i);
                     if(k==0)
                     {
-                        data[i][j]=jsonObject.getString("ID");
+                        data[i][j]=jsonObject.getString("User_Id");
                     }
                     else if(k==1)
                     {
-                        data[i][j]=jsonObject.getString("Name")    ;
+                        data[i][j]=jsonObject.getString("User_Name")    ;
                     }
                     else if(k==2)
                     {
