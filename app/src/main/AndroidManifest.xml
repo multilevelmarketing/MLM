@@ -16,7 +16,8 @@
             android:label="@string/title_activity_customer_amount_page"
             android:theme="@style/AppTheme.NoActionBar"
             android:parentActivityName=".Customer.Customer_Home_Page"/>
-        <activity android:name=".Customer.customer_create_customer"
+        <activity
+            android:name=".Customer.customer_create_customer"
             android:parentActivityName=".Customer.Customer_Home_Page"/>
         <activity
             android:name=".User.User_ShowCustomer"
@@ -25,8 +26,7 @@
             android:name=".Customer.Customer_show"
             android:parentActivityName=".Customer.Customer_Home_Page" />
         <activity android:name=".Customer.Customer_update" />
-        <activity android:name=".Admin.Admin_Update" />
-        <activity android:name=".Admin.User_Show" />
+        <activity android:name=".Admin.Admin_Update"/>
         <activity android:name=".Admin.Admin_Profile" />
         <activity android:name=".Admin.Admin_Panel" />
         <activity

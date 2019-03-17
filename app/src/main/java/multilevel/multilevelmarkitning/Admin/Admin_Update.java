@@ -68,7 +68,7 @@ public class Admin_Update extends AppCompatActivity
                     {
                         user_id.setText(new JSONObject(response).getString("RegId"));
                         user_name.setText(new JSONObject(response).getString("RegName"));
-                        company.setText(new JSONObject(response).getString("RegCompany"));
+                        company.setText(new JSONObject(response).getString("RegCmp"));
                         password.setText(new JSONObject(response).getString("RegPass"));
                         email.setText(new JSONObject(response).getString("RegEmail"));
                         mobile.setText(new JSONObject(response).getString("RegMobile"));
